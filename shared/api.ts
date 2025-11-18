@@ -10,3 +10,22 @@
 export interface DemoResponse {
   message: string;
 }
+
+/**
+ * AI Legal Assistant types
+ */
+export interface AiAssistantRequest {
+  question: string;
+}
+
+export interface LawReference {
+  lawId: string;
+  title: string;
+  legalReference: string;
+  excerpt: string;
+}
+
+export interface AiAssistantResponse {
+  answer: string;
+  references: LawReference[];
+}
