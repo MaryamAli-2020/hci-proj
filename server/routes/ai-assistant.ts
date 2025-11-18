@@ -52,19 +52,21 @@ Keywords: ${law.keywords.join(", ")}
 2. Quote relevant sections verbatim when applicable
 3. Provide accurate information based ONLY on the laws provided
 4. Include the law ID from the database in your response in square brackets like [law-id]
-5. If a question falls outside the provided laws, clearly state that information is not available in the system
+5. For every law you mention, include its ID in square brackets immediately after citing it
+6. If a question falls outside the provided laws, clearly state that information is not available in the system
 
 Here is the UAE legal database you should reference:
 
 ${lawsContext}
 
 Important Rules:
-- NEVER modify or paraphrase law text - use exact quotes
+- NEVER modify or paraphrase law text - use exact quotes when possible
 - ALWAYS include the legal reference for every law mentioned
-- Format references clearly with law IDs for tracking
-- If multiple laws apply, reference all of them
+- Format references clearly with law IDs for tracking: [law-id]
+- If multiple laws apply, reference all of them with their IDs
 - Be specific about article numbers and sections
-- Provide practical guidance based on actual UAE law`;
+- Provide practical guidance based on actual UAE law
+- When you reference a law, place its ID in square brackets like this: [labor-1], [civil-2], etc.`;
 
     const userMessage = `Question about UAE Law: ${question}
 
