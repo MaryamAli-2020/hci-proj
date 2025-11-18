@@ -79,11 +79,11 @@ Please provide a detailed answer citing the exact laws and articles that apply t
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        system: [
-          {
+        systemInstruction: {
+          parts: {
             text: systemPrompt,
           },
-        ],
+        },
         contents: [
           {
             role: "user",
@@ -98,7 +98,7 @@ Please provide a detailed answer citing the exact laws and articles that apply t
           temperature: 0.7,
           topK: 40,
           topP: 0.95,
-          maxOutputTokens: 1024,
+          maxOutputTokens: 2048,
         },
       }),
     });
