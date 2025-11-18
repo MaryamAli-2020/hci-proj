@@ -66,16 +66,24 @@ export default function Law() {
         <p className="text-lg text-gray-600 mb-6">{law.description}</p>
 
         {/* Meta Information */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
-          <div className="text-sm text-gray-500">
-            Last updated on{" "}
-            <span className="font-semibold">
-              {new Date(law.lastUpdated).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
+        <div className="flex flex-col sm:flex-row gap-4 sm:items-start sm:justify-between mb-4">
+          <div>
+            <div className="text-sm text-gray-500 mb-2">
+              Last updated on{" "}
+              <span className="font-semibold">
+                {new Date(law.lastUpdated).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </span>
+            </div>
+            <div className="inline-block px-3 py-2 bg-blue-50 border-l-4 border-blue-600 text-sm">
+              <p className="text-gray-900 font-semibold">Legal Reference</p>
+              <p className="text-blue-700 font-mono text-xs mt-1">
+                {law.legalReference}
+              </p>
+            </div>
           </div>
           <div className="flex gap-2">
             <Button
