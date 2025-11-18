@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { X, Send } from "lucide-react";
+import { X, Send, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { AiAssistantResponse, LawReference } from "@shared/api";
 
 interface Message {
   id: string;
   text: string;
   sender: "user" | "ai";
   timestamp: Date;
+  references?: LawReference[];
 }
 
 interface ChatDrawerProps {
@@ -15,24 +17,18 @@ interface ChatDrawerProps {
   onClose: () => void;
 }
 
-const SAMPLE_AI_RESPONSES = [
-  "I can help you understand various areas of law. Ask me about criminal law, civil law, corporate law, family law, labor law, or intellectual property.",
-  "That's a great question! To provide accurate legal information, I recommend consulting with a qualified attorney. However, I can explain the general principles.",
-  "Based on what you've described, this typically falls under the category of contract law. Would you like to know more about specific aspects?",
-  "Different jurisdictions have different regulations. The information I provide is general in nature. Please verify specific laws for your location.",
-];
-
 export function ChatDrawer({ isOpen, onClose }: ChatDrawerProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hello! I'm your AI legal assistant. I can help you explore and understand various areas of law. What would you like to know?",
+      text: "Assalamu Alaikum! 👋 I'm your UAE Legal AI Assistant. I can help you understand UAE laws and regulations across multiple practice areas including Labour Law, Civil Law, Criminal Law, Family Law, Corporate Law, and Intellectual Property. Ask me any question about UAE law and I'll provide you with exact legal references.",
       sender: "ai",
       timestamp: new Date(),
     },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,22 +49,48 @@ export function ChatDrawer({ isOpen, onClose }: ChatDrawerProps) {
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
+    setError(null);
 
-    // Simulate AI response delay
-    setTimeout(() => {
-      const randomResponse =
-        SAMPLE_AI_RESPONSES[
-          Math.floor(Math.random() * SAMPLE_AI_RESPONSES.length)
-        ];
+    try {
+      const response = await fetch("/api/ai-assistant", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ question: input }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get response from AI assistant");
+      }
+
+      const data: AiAssistantResponse = await response.json();
+
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: randomResponse,
+        text: data.answer,
+        sender: "ai",
+        timestamp: new Date(),
+        references: data.references,
+      };
+
+      setMessages((prev) => [...prev, aiMessage]);
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : "An error occurred";
+      setError(errorMessage);
+
+      const errorAiMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: `I apologize, but I encountered an error processing your question. ${errorMessage}. Please try again or rephrase your question.`,
         sender: "ai",
         timestamp: new Date(),
       };
-      setMessages((prev) => [...prev, aiMessage]);
+
+      setMessages((prev) => [...prev, errorAiMessage]);
+    } finally {
       setIsLoading(false);
-    }, 500);
+    }
   };
 
   if (!isOpen) return null;
@@ -91,12 +113,15 @@ export function ChatDrawer({ isOpen, onClose }: ChatDrawerProps) {
       >
         {/* Header */}
         <div className="border-b border-gray-200 p-4 flex items-center justify-between bg-gradient-to-r from-blue-50 to-blue-100">
-          <h2
-            id="chat-title"
-            className="font-semibold text-lg text-gray-900"
-          >
-            AI Legal Assistant
-          </h2>
+          <div>
+            <h2
+              id="chat-title"
+              className="font-semibold text-lg text-gray-900"
+            >
+              UAE Legal Assistant
+            </h2>
+            <p className="text-xs text-gray-600 mt-1">Powered by Gemini AI</p>
+          </div>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 transition-colors"
@@ -116,16 +141,44 @@ export function ChatDrawer({ isOpen, onClose }: ChatDrawerProps) {
               }`}
             >
               <div
-                className={`max-w-xs px-4 py-2 rounded-lg ${
+                className={`max-w-xs px-4 py-3 rounded-lg ${
                   message.sender === "user"
                     ? "bg-blue-600 text-white rounded-br-none"
                     : "bg-gray-100 text-gray-900 rounded-bl-none"
                 }`}
                 role={message.sender === "user" ? "listitem" : "article"}
               >
-                <p className="text-sm leading-relaxed">{message.text}</p>
+                <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                  {message.text}
+                </p>
+
+                {/* Law References */}
+                {message.references && message.references.length > 0 && (
+                  <div className="mt-3 pt-3 border-t border-gray-300 space-y-2">
+                    <p className="text-xs font-semibold text-gray-700">
+                      Legal References:
+                    </p>
+                    {message.references.map((ref) => (
+                      <div
+                        key={ref.lawId}
+                        className="text-xs bg-white/50 p-2 rounded border-l-2 border-blue-500"
+                      >
+                        <p className="font-semibold text-gray-800">
+                          {ref.title}
+                        </p>
+                        <p className="text-gray-700 mt-1">
+                          <strong>Citation:</strong> {ref.legalReference}
+                        </p>
+                        <p className="text-gray-600 mt-1 italic">
+                          {ref.excerpt}...
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 <span
-                  className={`text-xs mt-1 block ${
+                  className={`text-xs mt-2 block ${
                     message.sender === "user"
                       ? "text-blue-100"
                       : "text-gray-500"
@@ -150,6 +203,14 @@ export function ChatDrawer({ isOpen, onClose }: ChatDrawerProps) {
               </div>
             </div>
           )}
+          {error && (
+            <div className="flex justify-start">
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm flex gap-2">
+                <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                <p>{error}</p>
+              </div>
+            </div>
+          )}
           <div ref={messagesEndRef} />
         </div>
 
@@ -158,7 +219,7 @@ export function ChatDrawer({ isOpen, onClose }: ChatDrawerProps) {
           <form onSubmit={handleSendMessage} className="flex gap-2">
             <Input
               type="text"
-              placeholder="Ask a question..."
+              placeholder="Ask about UAE law..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               disabled={isLoading}
@@ -176,8 +237,8 @@ export function ChatDrawer({ isOpen, onClose }: ChatDrawerProps) {
             </Button>
           </form>
           <p className="text-xs text-gray-500 mt-2">
-            This is an AI assistant. Always consult with a qualified attorney
-            for legal advice.
+            💡 This AI references actual UAE laws. Always consult a licensed
+            attorney for legal advice.
           </p>
         </div>
       </div>
