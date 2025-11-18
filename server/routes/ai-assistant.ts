@@ -73,31 +73,25 @@ Important Rules:
 Please provide a detailed answer citing the exact laws and articles that apply to this question. Include the law IDs in square brackets.`;
 
     // Call Gemini API
+    const fullPrompt = `${systemPrompt}\n\n${userMessage}`;
+
     const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        systemInstruction: {
-          parts: {
-            text: systemPrompt,
-          },
-        },
         contents: [
           {
-            role: "user",
             parts: [
               {
-                text: userMessage,
+                text: fullPrompt,
               },
             ],
           },
         ],
         generationConfig: {
           temperature: 0.7,
-          topK: 40,
-          topP: 0.95,
           maxOutputTokens: 2048,
         },
       }),
