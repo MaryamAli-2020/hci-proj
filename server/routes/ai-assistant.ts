@@ -1,5 +1,5 @@
 import { RequestHandler } from "express";
-import { laws } from "@shared/laws";
+import { laws } from "../../shared/laws";
 
 interface AiAssistantRequest {
   question: string;
