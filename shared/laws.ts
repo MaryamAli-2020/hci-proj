@@ -1,3 +1,14 @@
+export interface LawVersion {
+  date: string;
+  title: string;
+  changes: string;
+}
+
+export interface ContentSection {
+  title: string;
+  content: string;
+}
+
 export interface Law {
   id: string;
   title: string;
@@ -8,6 +19,10 @@ export interface Law {
   legalReference: string;
   emirate?: string;
   keywords: string[];
+  aiSummary?: string;
+  sections?: ContentSection[];
+  versions?: LawVersion[];
+  crossReferences?: string[];
 }
 
 export interface Category {
