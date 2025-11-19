@@ -44,6 +44,59 @@ export default function Law() {
     (l) => l.category === law.category && l.id !== law.id
   );
 
+  const handleSave = () => {
+    if (!law) return;
+
+    const newSavedLaws = new Set(savedLaws);
+    if (newSavedLaws.has(law.id)) {
+      newSavedLaws.delete(law.id);
+      toast({
+        title: "Removed",
+        description: `"${law.title}" removed from saved items.`,
+      });
+    } else {
+      newSavedLaws.add(law.id);
+      toast({
+        title: "Saved",
+        description: `"${law.title}" saved successfully.`,
+      });
+    }
+    setSavedLaws(newSavedLaws);
+    localStorage.setItem("savedLaws", JSON.stringify(Array.from(newSavedLaws)));
+  };
+
+  const handleShare = async () => {
+    if (!law) return;
+
+    const shareUrl = `${window.location.origin}/law/${law.id}`;
+    const shareText = `${law.title} - QANOON Legal Resource`;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: shareText,
+          text: law.description,
+          url: shareUrl,
+        });
+      } catch (error) {
+        if ((error as Error).name !== "AbortError") {
+          copyToClipboard(shareUrl);
+        }
+      }
+    } else {
+      copyToClipboard(shareUrl);
+    }
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      toast({
+        title: "Link Copied",
+        description: "Law link copied to clipboard.",
+      });
+    });
+  };
+
   return (
     <Layout>
       {/* Breadcrumb */}
