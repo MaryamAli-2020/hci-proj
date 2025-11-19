@@ -284,6 +284,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-15",
     legalReference: "UAE Civil Code Federal Law No. 5 of 1985, Articles 127-147",
     keywords: ["contract", "formation", "validity", "agreement"],
+    aiSummary: "Valid UAE contracts require offer/acceptance, mutual intent, consideration, and parties 21+ years old and of sound mind. The subject must be legal and possible, and binding contracts cannot be unilaterally withdrawn.",
+    sections: [
+      { title: "Essential Elements", content: "A valid contract requires: offer and acceptance, intention to create legal relations, consideration, and legal capacity of parties." },
+      { title: "Legal Capacity", content: "Both parties must have reached the age of 21 years and be of sound mind." },
+      { title: "Subject Matter", content: "The subject matter must be legal and possible." },
+      { title: "Binding Nature", content: "Contracts are binding once accepted and cannot be unilaterally withdrawn unless agreed." }
+    ],
+    versions: [
+      { date: "2024-01-15", title: "Current Version", changes: "Contract formation rules updated" }
+    ],
+    crossReferences: ["civil-4", "corporate-4"]
   },
   {
     id: "civil-2",
@@ -294,6 +305,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-14",
     legalReference: "UAE Civil Code Federal Law No. 5 of 1985, Articles 184-225; Dubai Law No. 26 of 2006",
     keywords: ["property", "ownership", "real estate", "possession"],
+    aiSummary: "Property ownership includes possession, use, and disposal rights for both real property (land/structures) and personal property (movable items). Foreign nationals can own property in designated areas.",
+    sections: [
+      { title: "Ownership Rights", content: "Property ownership gives the owner full rights of possession, use, and disposal, subject to law and property of others." },
+      { title: "Types of Property", content: "Real property includes land and structures. Personal property includes movable items." },
+      { title: "Transfer of Rights", content: "Property rights can be transferred through sale, gift, or inheritance." },
+      { title: "Foreign Nationals", content: "Foreign nationals may own property in certain Dubai and Abu Dhabi designated areas." }
+    ],
+    versions: [
+      { date: "2024-01-14", title: "Current Version", changes: "Property law clarified" }
+    ],
+    crossReferences: ["family-4"]
   },
   {
     id: "civil-3",
@@ -304,6 +326,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-13",
     legalReference: "UAE Civil Code Federal Law No. 5 of 1985, Articles 249-286",
     keywords: ["debt", "liability", "payment", "obligation"],
+    aiSummary: "Debtors must pay fixed obligations at agreed times/places. Unpaid debts trigger liability for compensation. Debt can be settled by payment, novation, or agreement; civil liability arises from breach or unlawful acts.",
+    sections: [
+      { title: "Debt Definition", content: "Debt is a fixed obligation to pay a specific sum." },
+      { title: "Payment Obligations", content: "Debtors must pay at the agreed time and place." },
+      { title: "Default Liability", content: "If debt becomes due and unpaid, the debtor is liable for compensation and damages." },
+      { title: "Debt Settlement", content: "Debt can be settled by payment, novation, or by agreement. Civil liability arises from breach of contract or unlawful act causing damage." }
+    ],
+    versions: [
+      { date: "2024-01-13", title: "Current Version", changes: "Debt obligations clarified" }
+    ],
+    crossReferences: ["civil-1", "civil-4"]
   },
   {
     id: "civil-4",
@@ -314,6 +347,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-12",
     legalReference: "UAE Negotiable Instruments Law Federal Law No. 11 of 2020",
     keywords: ["cheque", "negotiable instrument", "payment", "promissory note"],
+    aiSummary: "Cheques are demand payment orders with 6-month presentation limits. Insufficient funds cheques are criminal offenses. Promissory notes and bills of exchange follow similar rules in UAE law.",
+    sections: [
+      { title: "Cheque Definition", content: "Cheques are written orders to pay a sum of money on demand." },
+      { title: "Presentation Time", content: "They must be presented within 6 months of issuance." },
+      { title: "Bounced Cheques", content: "Bounced cheques due to insufficient funds are an offense." },
+      { title: "Other Instruments", content: "Promissory notes and bills of exchange follow similar rules." }
+    ],
+    versions: [
+      { date: "2024-01-12", title: "Current Version", changes: "Negotiable instruments law updated" }
+    ],
+    crossReferences: ["civil-1", "civil-3"]
   },
   {
     id: "civil-5",
@@ -324,6 +368,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-11",
     legalReference: "UAE Consumer Protection Law Federal Law No. 24 of 2006, Articles 4-12",
     keywords: ["warranty", "product liability", "defect", "consumer protection"],
+    aiSummary: "Sellers must warrant goods meet quality standards and match descriptions. Defective goods allow buyers to claim replacement, repair, or refund within 12 months. Consumer protection covers all goods and services.",
+    sections: [
+      { title: "Seller Warranty", content: "The seller warrants that goods are of satisfactory quality, fit for purpose, and match the description." },
+      { title: "Defective Goods Remedies", content: "For defective goods, buyers may claim replacement, repair, or refund." },
+      { title: "Warranty Period", content: "The warranty period is generally 12 months from purchase." },
+      { title: "Consumer Protection Scope", content: "Consumer protection applies to all sales of goods and services in the consumer market." }
+    ],
+    versions: [
+      { date: "2024-01-11", title: "Current Version", changes: "Consumer protection standards updated" }
+    ],
+    crossReferences: ["civil-1", "civil-3"]
   },
 
   // Criminal Law
