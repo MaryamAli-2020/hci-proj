@@ -1,8 +1,16 @@
 import { RequestHandler } from "express";
 import { laws } from "../../shared/laws";
 
+interface ContextLaw {
+  id: string;
+  title: string;
+  content: string;
+  legalReference: string;
+}
+
 interface AiAssistantRequest {
   question: string;
+  contextLaw?: ContextLaw;
 }
 
 interface AiAssistantResponse {
