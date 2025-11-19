@@ -3,6 +3,7 @@ import { X, Send, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AiAssistantResponse, LawReference } from "@shared/api";
+import type { Law } from "@shared/laws";
 
 interface Message {
   id: string;
@@ -15,13 +16,21 @@ interface Message {
 interface ChatDrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  contextLaw?: Law;
 }
 
-export function ChatDrawer({ isOpen, onClose }: ChatDrawerProps) {
+export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
+  const getInitialMessage = (): string => {
+    if (contextLaw) {
+      return `Assalamu Alaikum! 👋 I see you're reading about "${contextLaw.title}". I'm your UAE Legal AI Assistant. I can help you understand this law in detail, answer specific questions about it, or connect it to related laws. What would you like to know?`;
+    }
+    return "Assalamu Alaikum! 👋 I'm your UAE Legal AI Assistant. I can help you understand UAE laws and regulations across multiple practice areas including Labour Law, Civil Law, Criminal Law, Family Law, Corporate Law, and Intellectual Property. Ask me any question about UAE law and I'll provide you with exact legal references.";
+  };
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Assalamu Alaikum! 👋 I'm your UAE Legal AI Assistant. I can help you understand UAE laws and regulations across multiple practice areas including Labour Law, Civil Law, Criminal Law, Family Law, Corporate Law, and Intellectual Property. Ask me any question about UAE law and I'll provide you with exact legal references.",
+      text: getInitialMessage(),
       sender: "ai",
       timestamp: new Date(),
     },
