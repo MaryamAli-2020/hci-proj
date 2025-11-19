@@ -61,12 +61,22 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
     setError(null);
 
     try {
+      const requestBody: any = { question: input };
+      if (contextLaw) {
+        requestBody.contextLaw = {
+          id: contextLaw.id,
+          title: contextLaw.title,
+          content: contextLaw.content,
+          legalReference: contextLaw.legalReference,
+        };
+      }
+
       const response = await fetch("/api/ai-assistant", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ question: input }),
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
