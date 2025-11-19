@@ -96,6 +96,39 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-15",
     legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Articles 64-66",
     keywords: ["working hours", "overtime", "compensation", "wages"],
+    aiSummary: "UAE law limits standard work weeks to 48 hours maximum, with stricter 40-hour limits for hazardous roles. All overtime must be compensated at minimum 25% above the regular wage rate, providing important protections for worker compensation.",
+    sections: [
+      {
+        title: "Standard Working Hours",
+        content: "The normal working hours shall not exceed 48 hours per week, which may be distributed over the days of the work week."
+      },
+      {
+        title: "Hazardous Work Conditions",
+        content: "For workers in hazardous or unhealthy conditions, the normal working hours shall not exceed 40 hours per week."
+      },
+      {
+        title: "Overtime Compensation",
+        content: "Overtime work shall be remunerated at least 25% above the ordinary wage."
+      }
+    ],
+    versions: [
+      {
+        date: "2024-01-15",
+        title: "Current Version",
+        changes: "Latest amendment with updated overtime rates"
+      },
+      {
+        date: "2022-06-20",
+        title: "Previous Amendment",
+        changes: "Clarified hazardous work classifications"
+      },
+      {
+        date: "2020-03-10",
+        title: "Original Decree",
+        changes: "Federal Decree No. 8 of 1980 enacted"
+      }
+    ],
+    crossReferences: ["labor-2", "labor-5", "labor-6"]
   },
   {
     id: "labor-2",
