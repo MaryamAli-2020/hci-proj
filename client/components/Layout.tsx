@@ -37,7 +37,7 @@ export function Layout({ children }: LayoutProps) {
               aria-label="QANOON Home"
             >
               <img
-                src="https://cdn.builder.io/api/v1/image/assets%2Ff46060a51def4581996706726593bb17%2F99e5b671b819491d93082e772b143a3d"
+                src="https://cdn.builder.io/api/v1/image/assets%2Ff46060a51def4581996706726593bb17%2F847e2fca57024abbaa68546de032858b"
                 alt="QANOON"
                 className="h-10 w-auto hidden sm:block"
               />
