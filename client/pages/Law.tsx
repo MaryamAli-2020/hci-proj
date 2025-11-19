@@ -30,7 +30,7 @@ export default function Law() {
             The law information you're looking for doesn't exist.
           </p>
           <Link to="/">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white gap-2">
+            <Button className="bg-amber-600 hover:bg-amber-700 text-white gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to Home
             </Button>
@@ -101,13 +101,13 @@ export default function Law() {
     <Layout>
       {/* Breadcrumb */}
       <div className="mb-6 flex items-center gap-2 text-sm text-gray-600">
-        <Link to="/" className="hover:text-blue-600 transition-colors">
+        <Link to="/" className="hover:text-amber-600 transition-colors">
           Home
         </Link>
         <span>/</span>
         <Link
           to={`/category/${category.id}`}
-          className="hover:text-blue-600 transition-colors"
+          className="hover:text-amber-600 transition-colors"
         >
           {category.title}
         </Link>
@@ -118,7 +118,7 @@ export default function Law() {
       {/* Header */}
       <div className="mb-8 pb-8 border-b border-gray-200">
         <div className="mb-4">
-          <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">
+          <span className="inline-block px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-semibold">
             {category.title}
           </span>
         </div>
@@ -140,9 +140,9 @@ export default function Law() {
                 })}
               </span>
             </div>
-            <div className="inline-block px-3 py-2 bg-blue-50 border-l-4 border-blue-600 text-sm">
+            <div className="inline-block px-3 py-2 bg-amber-50 border-l-4 border-amber-600 text-sm">
               <p className="text-gray-900 font-semibold">Legal Reference</p>
-              <p className="text-blue-700 font-mono text-xs mt-1">
+              <p className="text-amber-700 font-mono text-xs mt-1">
                 {law.legalReference}
               </p>
             </div>
@@ -187,7 +187,7 @@ export default function Law() {
         {/* Content */}
         <div className="lg:col-span-2">
           <article className="prose prose-sm max-w-none text-gray-700">
-            <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded mb-6">
+            <div className="bg-amber-50 border-l-4 border-amber-600 p-4 rounded mb-6">
               <p className="text-sm">
                 <strong>Disclaimer:</strong> This information is provided for
                 educational purposes only and is not legal advice. For legal
@@ -217,7 +217,7 @@ export default function Law() {
                 <dd>
                   <Link
                     to={`/category/${category.id}`}
-                    className="text-blue-600 hover:text-blue-700 font-semibold"
+                    className="text-amber-600 hover:text-amber-700 font-semibold"
                   >
                     {category.title}
                   </Link>
