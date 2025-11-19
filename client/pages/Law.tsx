@@ -237,13 +237,16 @@ export default function Law() {
           </div>
 
           {/* Need Help */}
-          <div className="bg-blue-600 text-white rounded-lg p-6">
+          <div className="bg-amber-600 text-white rounded-lg p-6">
             <h3 className="font-bold mb-2">Need Legal Help?</h3>
-            <p className="text-sm text-blue-100 mb-4">
+            <p className="text-sm text-amber-100 mb-4">
               Use our AI assistant to ask questions or get more information about
               this topic.
             </p>
-            <Button className="w-full bg-white hover:bg-gray-100 text-blue-600 font-semibold">
+            <Button
+              onClick={() => setIsChatOpen(true)}
+              className="w-full bg-white hover:bg-gray-100 text-amber-600 font-semibold"
+            >
               Ask AI Assistant
             </Button>
           </div>
