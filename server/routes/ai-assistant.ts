@@ -29,7 +29,7 @@ const GEMINI_API_URL =
 
 export const handleAiAssistant: RequestHandler = async (req, res) => {
   try {
-    const { question } = req.body as AiAssistantRequest;
+    const { question, contextLaw } = req.body as AiAssistantRequest;
 
     if (!question || typeof question !== "string") {
       res.status(400).json({ error: "Question is required" });
@@ -54,6 +54,11 @@ Keywords: ${law.keywords.join(", ")}
       )
       .join("\n\n");
 
+    const contextSection = contextLaw
+      ? `\nThe user is currently reading about: "${contextLaw.title}" (Reference: ${contextLaw.legalReference})
+You should prioritize this law in your answer and connect other laws to it when relevant.`
+      : "";
+
     const systemPrompt = `You are a specialized UAE legal assistant. You have access to comprehensive UAE law information. When answering questions:
 
 1. ALWAYS cite the exact law reference (e.g., "Federal Law No. X of XXXX, Article Y")
@@ -66,6 +71,7 @@ Keywords: ${law.keywords.join(", ")}
 Here is the UAE legal database you should reference:
 
 ${lawsContext}
+${contextSection}
 
 Important Rules:
 - NEVER modify or paraphrase law text - use exact quotes when possible
