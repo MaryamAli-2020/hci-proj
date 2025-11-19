@@ -149,18 +149,30 @@ export default function Law() {
           </div>
           <div className="flex gap-2">
             <Button
-              variant="outline"
+              onClick={handleSave}
+              variant={savedLaws.has(law.id) ? "default" : "outline"}
               size="sm"
-              className="gap-2 border-gray-300"
+              className={`gap-2 ${
+                savedLaws.has(law.id)
+                  ? "bg-amber-600 hover:bg-amber-700 text-white border-amber-600"
+                  : "border-gray-300"
+              }`}
               aria-label="Save this law"
             >
-              <Bookmark className="w-4 h-4" />
-              <span className="hidden sm:inline">Save</span>
+              {savedLaws.has(law.id) ? (
+                <Check className="w-4 h-4" />
+              ) : (
+                <Bookmark className="w-4 h-4" />
+              )}
+              <span className="hidden sm:inline">
+                {savedLaws.has(law.id) ? "Saved" : "Save"}
+              </span>
             </Button>
             <Button
+              onClick={handleShare}
               variant="outline"
               size="sm"
-              className="gap-2 border-gray-300"
+              className="gap-2 border-gray-300 hover:border-amber-600 hover:text-amber-600"
               aria-label="Share this law"
             >
               <Share2 className="w-4 h-4" />
