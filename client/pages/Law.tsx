@@ -266,8 +266,8 @@ export default function Law() {
                 to={`/law/${relatedLaw.id}`}
                 className="group"
               >
-                <div className="border border-gray-200 rounded-lg p-4 transition-all duration-300 hover:border-blue-300 hover:shadow-md bg-white hover:bg-blue-50 h-full">
-                  <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+                <div className="border border-gray-200 rounded-lg p-4 transition-all duration-300 hover:border-amber-300 hover:shadow-md bg-white hover:bg-amber-50 h-full">
+                  <h3 className="font-semibold text-gray-900 group-hover:text-amber-600 transition-colors mb-2">
                     {relatedLaw.title}
                   </h3>
                   <p className="text-sm text-gray-600 line-clamp-2">
@@ -279,6 +279,13 @@ export default function Law() {
           </div>
         </section>
       )}
+
+      {/* Chat Drawer */}
+      <ChatDrawer
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+        contextLaw={law}
+      />
     </Layout>
   );
 }
