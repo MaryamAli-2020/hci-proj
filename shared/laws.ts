@@ -678,6 +678,19 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-15",
     legalReference: "UAE Trademark Law Federal Law No. 23 of 1992, Articles 1-25",
     keywords: ["trademark", "brand", "registration", "intellectual property"],
+    aiSummary: "Trademark registration provides exclusive nationwide protection for words, symbols, and designs. Valid 10 years, renewable indefinitely. Registration required for ® symbol. Non-use 3+ years risks cancellation.",
+    sections: [
+      { title: "Trademark Types", content: "Trademarks can be words, symbols, designs, or combinations." },
+      { title: "Registration and Rights", content: "Registration with Ministry of Economy provides exclusive rights and nationwide protection." },
+      { title: "Validity Period", content: "Valid for 10 years, renewable indefinitely." },
+      { title: "Infringement Protection", content: "Infringement is prohibited." },
+      { title: "Registration Symbol", content: "Registration is required before using ® symbol." },
+      { title: "Non-Use Cancellation", content: "Non-use for 3 consecutive years may result in cancellation." }
+    ],
+    versions: [
+      { date: "2024-01-15", title: "Current Version", changes: "Trademark law reaffirmed" }
+    ],
+    crossReferences: ["intellectual-2"]
   },
   {
     id: "intellectual-2",
@@ -688,5 +701,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-14",
     legalReference: "UAE Copyright Law Federal Law No. 7 of 2002, Articles 1-30",
     keywords: ["copyright", "author", "creative work", "intellectual property"],
+    aiSummary: "Copyright automatically protects original literary, artistic, musical, and dramatic works upon creation. No registration needed. Rights extend lifetime plus 50 years. Employee works belong to employer unless agreed.",
+    sections: [
+      { title: "Automatic Protection", content: "Copyright automatically protects original literary, artistic, musical, and dramatic works upon creation." },
+      { title: "Registration", content: "No registration required." },
+      { title: "Copyright Holder Rights", content: "Copyright holder has exclusive rights to reproduce, distribute, and publicly perform." },
+      { title: "Duration", content: "Copyright lasts for author's lifetime plus 50 years." },
+      { title: "Employee Works", content: "Works created by employees belong to employer unless agreed otherwise." }
+    ],
+    versions: [
+      { date: "2024-01-14", title: "Current Version", changes: "Copyright protection confirmed" }
+    ],
+    crossReferences: ["intellectual-1"]
   },
 ];
