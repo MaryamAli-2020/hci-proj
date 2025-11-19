@@ -586,6 +586,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-15",
     legalReference: "UAE Commercial Companies Law Federal Law No. 2 of 2015, Articles 1-60",
     keywords: ["company", "formation", "registration", "business entity"],
+    aiSummary: "UAE companies require registration with Department of Economic Development. Local partnership (51%) typically required unless in free zones. Documents needed: memorandum, articles, and identification.",
+    sections: [
+      { title: "Company Types", content: "Companies can be formed as private, public, or free zone entities." },
+      { title: "Registration Requirement", content: "Each requires registration with the Department of Economic Development." },
+      { title: "Required Documents", content: "Required documents include memorandum and articles, identification, and commercial registration." },
+      { title: "Local Partnership", content: "A company must have a local partner (51% ownership required unless in free zone or eligible exemption)." }
+    ],
+    versions: [
+      { date: "2024-01-15", title: "Current Version", changes: "Company formation procedures updated" }
+    ],
+    crossReferences: ["corporate-2", "corporate-3", "corporate-4"]
   },
   {
     id: "corporate-2",
@@ -596,6 +607,20 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-14",
     legalReference: "UAE Commercial Companies Law Federal Law No. 2 of 2015, Articles 96-130",
     keywords: ["LLC", "limited liability", "partnership", "capital"],
+    aiSummary: "LLCs require 2-50 partners with minimum AED 10,000 capital. Liability limited to capital contribution. Profit/loss sharing as agreed. Annual audits required. Free zones allow 100% foreign ownership.",
+    sections: [
+      { title: "LLC Definition", content: "An LLC is a partnership with limited liability." },
+      { title: "Partner Requirements", content: "Minimum 2 partners, maximum 50." },
+      { title: "Capital Requirement", content: "Minimum capital AED 10,000." },
+      { title: "Liability Protection", content: "Each partner's liability limited to their capital contribution." },
+      { title: "Profit and Loss Sharing", content: "Partners share profits and losses as agreed." },
+      { title: "Financial Requirements", content: "Requires annual financial statements and audits." },
+      { title: "Foreign Ownership", content: "Free zone LLCs can have 100% foreign ownership." }
+    ],
+    versions: [
+      { date: "2024-01-14", title: "Current Version", changes: "LLC regulations clarified" }
+    ],
+    crossReferences: ["corporate-1", "corporate-3"]
   },
   {
     id: "corporate-3",
@@ -606,6 +631,19 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-13",
     legalReference: "UAE Commercial Companies Law Federal Law No. 2 of 2015, Articles 146-213",
     keywords: ["public company", "shares", "stock", "board of directors"],
+    aiSummary: "Public companies need AED 10 million minimum capital, 3-15 board members, and annual shareholders' meetings. Listed companies face Central Bank oversight and must follow corporate governance standards.",
+    sections: [
+      { title: "Public Company Structure", content: "A public company has shares available to public investment." },
+      { title: "Minimum Capital", content: "Minimum share capital AED 10 million." },
+      { title: "Board of Directors", content: "Must have board of directors (minimum 3, maximum 15)." },
+      { title: "Annual General Assembly", content: "Annual general assembly required." },
+      { title: "Regulatory Supervision", content: "Subject to Central Bank supervision if listed." },
+      { title: "Compliance Requirements", content: "Must comply with corporate governance standards and disclosure requirements." }
+    ],
+    versions: [
+      { date: "2024-01-13", title: "Current Version", changes: "Public company regulations updated" }
+    ],
+    crossReferences: ["corporate-1", "corporate-2"]
   },
   {
     id: "corporate-4",
@@ -616,6 +654,18 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-12",
     legalReference: "UAE Civil Code Federal Law No. 5 of 1985, Articles 127-322",
     keywords: ["contract", "business agreement", "terms", "obligations"],
+    aiSummary: "Business contracts must specify parties, consideration, obligations, duration, and dispute resolution. Arabic preferred for enforcement. Must comply with UAE law. Breach results in liability.",
+    sections: [
+      { title: "Required Terms", content: "Business contracts must clearly specify parties, consideration, obligations, duration, and dispute resolution." },
+      { title: "Language Preference", content: "Contracts in Arabic are preferred for UAE enforcement." },
+      { title: "Legal Compliance", content: "Contracts must comply with UAE law." },
+      { title: "Breach Liability", content: "Violations result in breach of contract liability." },
+      { title: "Specific Contract Types", content: "Specific contracts like sales, agency, lease have additional legal requirements." }
+    ],
+    versions: [
+      { date: "2024-01-12", title: "Current Version", changes: "Commercial contract standards clarified" }
+    ],
+    crossReferences: ["corporate-1", "civil-1"]
   },
 
   // Intellectual Property
