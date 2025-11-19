@@ -391,6 +391,16 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-15",
     legalReference: "UAE Penal Code Federal Law No. 3 of 1987, Articles 379-386",
     keywords: ["theft", "embezzlement", "stealing", "misappropriation"],
+    aiSummary: "Theft carries 6 months to 3 years imprisonment. Employee embezzlement faces up to 5 years. Armed theft is more severely punished with up to 10 years imprisonment under UAE penal law.",
+    sections: [
+      { title: "Simple Theft", content: "Theft is the taking of another's property without permission with intent to keep it. Punishment ranges from 6 months to 3 years imprisonment and/or fines." },
+      { title: "Employee Embezzlement", content: "Embezzlement by employees is punishable by imprisonment up to 5 years." },
+      { title: "Aggravated Theft", content: "Aggravated theft with weapons carries stricter penalties up to 10 years." }
+    ],
+    versions: [
+      { date: "2024-01-15", title: "Current Version", changes: "Theft penalties reaffirmed" }
+    ],
+    crossReferences: ["criminal-2"]
   },
   {
     id: "criminal-2",
@@ -401,6 +411,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-14",
     legalReference: "UAE Penal Code Federal Law No. 3 of 1987, Articles 338-357; 383",
     keywords: ["fraud", "forgery", "deception", "false document"],
+    aiSummary: "Fraud results in 3 months to 3 years imprisonment. Document forgery carries 6 months to 5 years. Using forged documents is criminal, with official document forgery carrying enhanced penalties.",
+    sections: [
+      { title: "Fraud", content: "Fraud includes deception causing financial loss. Punishment is 3 months to 3 years imprisonment and/or fine." },
+      { title: "Document Forgery", content: "Forgery of documents is punishable by 6 months to 5 years imprisonment." },
+      { title: "Using Forged Documents", content: "Using forged documents is also criminal." },
+      { title: "Official Document Forgery", content: "Forgery of official documents carries enhanced penalties." }
+    ],
+    versions: [
+      { date: "2024-01-14", title: "Current Version", changes: "Fraud and forgery penalties clarified" }
+    ],
+    crossReferences: ["criminal-1"]
   },
   {
     id: "criminal-3",
@@ -411,6 +432,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-13",
     legalReference: "UAE Penal Code Federal Law No. 3 of 1987, Articles 334-336",
     keywords: ["assault", "injury", "violence", "bodily harm"],
+    aiSummary: "Simple assault gets 6 months to 2 years imprisonment. Grievous bodily harm receives 1-3 years. Official assaults and weapon-aided injuries receive enhanced sentences up to 5 years.",
+    sections: [
+      { title: "Simple Assault", content: "Simple assault causing injury is punishable by 6 months to 2 years imprisonment." },
+      { title: "Grievous Bodily Harm", content: "Grievous bodily harm carries 1 to 3 years imprisonment." },
+      { title: "Official Assault", content: "Assault by government officials carries enhanced penalties." },
+      { title: "Assault with Implements", content: "Intentional injury with specified implements carries 1 to 5 years imprisonment depending on severity." }
+    ],
+    versions: [
+      { date: "2024-01-13", title: "Current Version", changes: "Assault penalties clarified" }
+    ],
+    crossReferences: []
   },
   {
     id: "criminal-4",
@@ -421,6 +453,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-12",
     legalReference: "UAE Anti-Narcotics Law Federal Law No. 14 of 1995, Articles 12-40",
     keywords: ["drug", "trafficking", "possession", "narcotics"],
+    aiSummary: "Drug possession carries 3 months to 1 year. Trafficking results in 4 years to life imprisonment. Distribution/sale and cultivation face severe penalties of 10 years to life sentences.",
+    sections: [
+      { title: "Personal Possession", content: "Possession of drugs for personal use is punishable by 3 months to 1 year imprisonment." },
+      { title: "Drug Trafficking", content: "Drug trafficking carries 4 years to life imprisonment depending on quantity and substance." },
+      { title: "Distribution and Sale", content: "Distribution and sale of drugs carry 10 years to life imprisonment." },
+      { title: "Cultivation", content: "Cultivation of narcotic plants carries severe penalties." }
+    ],
+    versions: [
+      { date: "2024-01-12", title: "Current Version", changes: "Anti-narcotics provisions reaffirmed" }
+    ],
+    crossReferences: []
   },
   {
     id: "criminal-5",
@@ -431,6 +474,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-11",
     legalReference: "UAE Traffic Law Federal Law No. 21 of 1995, Articles 79-95; Penal Code Articles 269-272",
     keywords: ["DUI", "traffic", "alcohol", "driving under influence"],
+    aiSummary: "DUI carries fines AED 1,000-50,000, up to 6 months imprisonment, vehicle confiscation, and license suspension. Any blood alcohol above 50mg is illegal. Injury-causing DUI results in 5-10 years imprisonment.",
+    sections: [
+      { title: "DUI Offense", content: "Driving under alcohol influence is a serious criminal offense." },
+      { title: "Basic Penalties", content: "Penalties include fines from AED 1,000 to AED 50,000, imprisonment up to 6 months, vehicle confiscation, and license suspension." },
+      { title: "Blood Alcohol Limit", content: "Blood alcohol level above 50mg is illegal." },
+      { title: "DUI with Injury", content: "Causing injury while driving under influence carries 5 to 10 years imprisonment." }
+    ],
+    versions: [
+      { date: "2024-01-11", title: "Current Version", changes: "Traffic law penalties clarified" }
+    ],
+    crossReferences: []
   },
 
   // Family Law
