@@ -1,11 +1,20 @@
 import { useParams, Link } from "react-router-dom";
+import { useState } from "react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { categories, laws } from "@/data/laws";
-import { ArrowLeft, Share2, Bookmark } from "lucide-react";
+import { ArrowLeft, Share2, Bookmark, Check } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { ChatDrawer } from "@/components/ChatDrawer";
 
 export default function Law() {
   const { lawId } = useParams<{ lawId: string }>();
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [savedLaws, setSavedLaws] = useState<Set<string>>(() => {
+    const saved = localStorage.getItem("savedLaws");
+    return new Set(saved ? JSON.parse(saved) : []);
+  });
+  const { toast } = useToast();
 
   const law = laws.find((l) => l.id === lawId);
   const category = categories.find((c) => c.id === law?.category);
