@@ -139,6 +139,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-14",
     legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Articles 70-72",
     keywords: ["annual leave", "public holidays", "vacation", "paid leave"],
+    aiSummary: "UAE workers are entitled to minimum 30 days annual leave including public holidays, with extended 45 days for hazardous work. All leave is paid at full wages, protecting workers' right to rest and leisure.",
+    sections: [
+      { title: "Minimum Annual Leave", content: "Every worker shall be entitled to an annual leave of at least 30 calendar days, including public holidays." },
+      { title: "Extended Leave for Hazardous Work", content: "For workers engaged in arduous or hazardous occupations, the leave shall be extended to 45 days." },
+      { title: "Leave Payment", content: "The worker shall be paid his full wages during the leave period." }
+    ],
+    versions: [
+      { date: "2024-01-14", title: "Current Version", changes: "Updated leave day calculations" },
+      { date: "2021-09-15", title: "Amendment", changes: "Extended leave for hazardous occupations" }
+    ],
+    crossReferences: ["labor-1", "labor-6"]
   },
   {
     id: "labor-3",
@@ -149,6 +160,16 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-13",
     legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Article 84",
     keywords: ["gratuity", "severance", "termination", "end of service"],
+    aiSummary: "UAE employers must provide severance gratuity to terminated workers, calculated as 1/3 of last wage per year (1-5 years) or 1/2 per year (5+ years). No gratuity applies for employment under one year.",
+    sections: [
+      { title: "Service Less Than 1 Year", content: "No gratuity for workers with less than one year of service." },
+      { title: "Service 1-5 Years", content: "1/3 of the last wage for each year of service." },
+      { title: "Service 5 Years and Above", content: "1/2 of the last wage for each year of service." }
+    ],
+    versions: [
+      { date: "2024-01-13", title: "Current Version", changes: "Confirmed gratuity calculations" }
+    ],
+    crossReferences: ["labor-8"]
   },
   {
     id: "labor-4",
@@ -159,6 +180,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-12",
     legalReference: "UAE Cabinet Resolution No. 15 of 2020 regarding Minimum Wage",
     keywords: ["minimum wage", "salary", "AED 2500", "compensation"],
+    aiSummary: "The UAE's current minimum wage for private sector workers is AED 2,500 per month. This can be adjusted by ministerial decision, and workers under collective agreements may earn higher amounts.",
+    sections: [
+      { title: "General Minimum Wage", content: "The general minimum wage is AED 2,500 per month for all workers in the private sector." },
+      { title: "Ministerial Adjustments", content: "The minimum wage may be adjusted by ministerial decision." },
+      { title: "Collective Agreements", content: "Workers under collective labour agreements may receive higher wages." }
+    ],
+    versions: [
+      { date: "2024-01-12", title: "Current Version", changes: "AED 2,500 minimum wage in effect" },
+      { date: "2020-12-20", title: "Cabinet Resolution", changes: "Minimum wage set at AED 2,500" }
+    ],
+    crossReferences: ["labor-1", "labor-6"]
   },
   {
     id: "labor-5",
@@ -169,6 +201,16 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-11",
     legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Articles 30-37; Federal Law No. 38 of 1998",
     keywords: ["safety", "health", "hazard", "workplace conditions"],
+    aiSummary: "UAE law mandates employers maintain safe working conditions with proper ventilation, lighting, and sanitary facilities. Employers must provide safety equipment, training, and insurance coverage for workplace accidents.",
+    sections: [
+      { title: "Safe Working Conditions", content: "Employers must provide safe and healthy working conditions, ensure proper ventilation, adequate lighting, and sanitary facilities." },
+      { title: "Safety Equipment and Training", content: "Employers must provide safety equipment and training." },
+      { title: "Hazard Protection and Insurance", content: "Workers must be protected from hazardous conditions, and employers must maintain accident insurance coverage." }
+    ],
+    versions: [
+      { date: "2024-01-11", title: "Current Version", changes: "Safety standards reaffirmed" }
+    ],
+    crossReferences: ["labor-1", "labor-7"]
   },
   {
     id: "labor-6",
@@ -179,6 +221,16 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-10",
     legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Articles 16-24",
     keywords: ["employment contract", "terms", "conditions", "wages"],
+    aiSummary: "Valid UAE employment contracts must specify job nature, location, wages, hours, leave, and duration in Arabic. Wage deductions only allowed for legal/authorized purposes, protecting worker pay and rights.",
+    sections: [
+      { title: "Mandatory Contract Terms", content: "An employment contract must include: nature of work, place of work, wage or salary, work hours, leave entitlements, and employment duration." },
+      { title: "Contract Language", content: "The contract must be in Arabic and provided to the worker." },
+      { title: "Wage Protection", content: "No deduction from wages except for legal requirements and authorized deductions." }
+    ],
+    versions: [
+      { date: "2024-01-10", title: "Current Version", changes: "Contract requirements clarified" }
+    ],
+    crossReferences: ["labor-1", "labor-2", "labor-4"]
   },
   {
     id: "labor-7",
@@ -189,6 +241,16 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-09",
     legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Article 9; Federal Law No. 5 of 1985",
     keywords: ["discrimination", "harassment", "equality", "workplace rights"],
+    aiSummary: "UAE law prohibits workplace discrimination based on nationality, gender, religion, or social status. Employers must ensure harassment-free environments, with violations resulting in AED 10,000-50,000 fines.",
+    sections: [
+      { title: "Prohibited Discrimination", content: "No worker shall be discriminated against based on nationality, gender, religion, or social class." },
+      { title: "Employer Responsibilities", content: "Employers must maintain respectful workplaces free from harassment and intimidation." },
+      { title: "Penalties", content: "Violations can result in fines from AED 10,000 to AED 50,000." }
+    ],
+    versions: [
+      { date: "2024-01-09", title: "Current Version", changes: "Anti-discrimination provisions reaffirmed" }
+    ],
+    crossReferences: ["labor-5"]
   },
   {
     id: "labor-8",
@@ -199,6 +261,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-08",
     legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Articles 120-126",
     keywords: ["termination", "dismissal", "notice period", "employment end"],
+    aiSummary: "Employment termination requires 30 days' notice minimum. Just cause dismissals (gross misconduct, neglect) don't require gratuity, while regular terminations do provide end-of-service compensation.",
+    sections: [
+      { title: "Termination Methods", content: "Employment may be terminated by notice, immediate dismissal for just cause, or end of contract." },
+      { title: "Notice Period", content: "For termination by notice, a minimum notice period of 30 days is required from the employer." },
+      { title: "Just Cause Grounds", content: "Just cause includes gross misconduct, neglect of duty, or repeated violations." },
+      { title: "Gratuity Rights", content: "The worker must receive end of service gratuity unless dismissed for just cause." }
+    ],
+    versions: [
+      { date: "2024-01-08", title: "Current Version", changes: "Termination procedures clarified" }
+    ],
+    crossReferences: ["labor-3"]
   },
 
   // Civil Law
