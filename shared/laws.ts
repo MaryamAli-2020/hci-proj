@@ -497,6 +497,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-15",
     legalReference: "UAE Personal Status Law Federal Law No. 28 of 2005, Articles 1-17",
     keywords: ["marriage", "consent", "contract", "registration"],
+    aiSummary: "Marriage in UAE requires legal age (18+, or 16-17 with consent), free agreement from both parties, and official registration. Unregistered marriages lack legal validity.",
+    sections: [
+      { title: "Marriage Definition", content: "Marriage is a contract between man and woman." },
+      { title: "Legal Age", content: "Both must be of legal age (18 years, or 16-17 with guardian consent)." },
+      { title: "Consent Requirement", content: "Both must consent freely." },
+      { title: "Registration", content: "The marriage must be registered with authorities. A marriage contract specifies rights and obligations. Marriage without proper registration is not valid in law." }
+    ],
+    versions: [
+      { date: "2024-01-15", title: "Current Version", changes: "Marriage requirements reaffirmed" }
+    ],
+    crossReferences: ["family-2", "family-3"]
   },
   {
     id: "family-2",
@@ -507,6 +518,17 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-14",
     legalReference: "UAE Personal Status Law Federal Law No. 28 of 2005, Articles 99-125",
     keywords: ["divorce", "separation", "dissolution", "talaq"],
+    aiSummary: "UAE divorce methods include mutual consent, judicial decree, or talaq. Judicial grounds include non-support or harmful behavior. Women can request khul' (divorce for surrender of rights).",
+    sections: [
+      { title: "Mutual Consent Divorce", content: "For mutual divorce, both parties must agree and register with authorities." },
+      { title: "Judicial Divorce", content: "Judicial divorce is granted for specific grounds including non-support, harmful behavior, or failure of marital obligations." },
+      { title: "Talaq", content: "Divorce by repudiation (talaq) is recognized." },
+      { title: "Khul'", content: "Women have right to request divorce (khul') in exchange for surrendering rights." }
+    ],
+    versions: [
+      { date: "2024-01-14", title: "Current Version", changes: "Divorce procedures clarified" }
+    ],
+    crossReferences: ["family-1", "family-3", "family-4"]
   },
   {
     id: "family-3",
@@ -517,6 +539,18 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-13",
     legalReference: "UAE Personal Status Law Federal Law No. 28 of 2005, Articles 143-162",
     keywords: ["custody", "child rights", "guardianship", "parental rights"],
+    aiSummary: "Mother typically has custody until age 13 (boys) or 15 (girls). Father provides financial support. Courts prioritize child's best interests. Children have rights to education, healthcare, and inheritance.",
+    sections: [
+      { title: "Custody Determination", content: "Child custody is determined based on child's best interests." },
+      { title: "Maternal Custody", content: "Mother has right to custody of children until age 13 (boys) and 15 (girls) in default cases." },
+      { title: "Paternal Financial Support", content: "Father is responsible for financial support." },
+      { title: "Guardianship and Alternative Custody", content: "Both parents have guardianship rights. Court may award custody to other qualified guardians if parents are unfit." },
+      { title: "Children's Rights", content: "Children's rights include education, healthcare, and inheritance." }
+    ],
+    versions: [
+      { date: "2024-01-13", title: "Current Version", changes: "Child custody rights clarified" }
+    ],
+    crossReferences: ["family-1", "family-2", "family-4"]
   },
   {
     id: "family-4",
@@ -527,6 +561,19 @@ export const laws: Law[] = [
     lastUpdated: "2024-01-12",
     legalReference: "UAE Personal Status Law Federal Law No. 28 of 2005, Articles 234-270",
     keywords: ["inheritance", "succession", "estate", "heirs"],
+    aiSummary: "Islamic inheritance law applies unless a non-Islamic will exists. Spouses receive 1/4 or 1/8. Children share remainder. Gender differences apply under Islamic law. Non-Muslims can write valid wills.",
+    sections: [
+      { title: "Islamic Inheritance Law", content: "Islamic inheritance law applies unless the deceased left a non-Islamic will." },
+      { title: "Heir Classification", content: "Heirs are classified as primary (children, parents, spouse) and secondary." },
+      { title: "Spouse Share", content: "The deceased's spouse receives 1/4 or 1/8 depending on heirs." },
+      { title: "Children's Share", content: "Children share the remaining estate." },
+      { title: "Gender Differences", content: "Males and females inherit differently under Islamic law." },
+      { title: "Non-Muslim Wills", content: "Non-Muslims can make valid wills for their property." }
+    ],
+    versions: [
+      { date: "2024-01-12", title: "Current Version", changes: "Inheritance rules confirmed" }
+    ],
+    crossReferences: ["family-1", "family-2", "family-3"]
   },
 
   // Corporate Law
