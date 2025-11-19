@@ -86,34 +86,41 @@ Important Rules:
 
 Please provide a detailed answer citing the exact laws and articles that apply to this question. Include the law IDs in square brackets.`;
 
-    // Call Gemini API
-    const fullPrompt = `${systemPrompt}\n\n${userMessage}`;
+    // Call Gemini API with proper format
+    const requestBody = {
+      systemInstruction: {
+        parts: {
+          text: systemPrompt,
+        },
+      },
+      contents: [
+        {
+          role: "user",
+          parts: [
+            {
+              text: userMessage,
+            },
+          ],
+        },
+      ],
+      generationConfig: {
+        temperature: 0.7,
+        maxOutputTokens: 2048,
+      },
+    };
 
     const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              {
-                text: fullPrompt,
-              },
-            ],
-          },
-        ],
-        generationConfig: {
-          temperature: 0.7,
-          maxOutputTokens: 2048,
-        },
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!response.ok) {
       const error = await response.json();
       console.error("Gemini API error:", error);
+      console.error("Request body:", requestBody);
       res.status(500).json({ error: "Failed to get AI response" });
       return;
     }
