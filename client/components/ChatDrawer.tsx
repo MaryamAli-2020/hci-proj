@@ -131,7 +131,7 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
         aria-modal="true"
       >
         {/* Header */}
-        <div className="border-b border-gray-200 p-4 flex items-center justify-between bg-gradient-to-r from-blue-50 to-blue-100">
+        <div className="border-b border-gray-200 p-4 flex items-center justify-between bg-gradient-to-r from-amber-50 to-amber-100">
           <div>
             <h2
               id="chat-title"
@@ -162,7 +162,7 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
               <div
                 className={`max-w-xs px-4 py-3 rounded-lg ${
                   message.sender === "user"
-                    ? "bg-blue-600 text-white rounded-br-none"
+                    ? "bg-amber-600 text-white rounded-br-none"
                     : "bg-gray-100 text-gray-900 rounded-bl-none"
                 }`}
                 role={message.sender === "user" ? "listitem" : "article"}
@@ -180,7 +180,7 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
                     {message.references.map((ref) => (
                       <div
                         key={ref.lawId}
-                        className="text-xs bg-white/50 p-2 rounded border-l-2 border-blue-500"
+                        className="text-xs bg-white/50 p-2 rounded border-l-2 border-amber-500"
                       >
                         <p className="font-semibold text-gray-800">
                           {ref.title}
@@ -249,7 +249,7 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
               type="submit"
               disabled={isLoading || !input.trim()}
               size="sm"
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-amber-600 hover:bg-amber-700 text-white"
               aria-label="Send message"
             >
               <Send className="w-4 h-4" />
