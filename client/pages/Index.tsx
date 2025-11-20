@@ -209,16 +209,15 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className="rounded-xl bg-amber-600 text-white py-12 px-8 text-center">
-        <h2 className="text-3xl font-bold mb-4">
-          Still have questions about the law?
+      <section className={`rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 text-white py-16 px-8 text-center ${isRTL ? "text-right" : ""}`}>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          {t("cta.title")}
         </h2>
-        <p className="text-amber-100 text-lg mb-6 max-w-2xl mx-auto">
-          Our AI-powered legal assistant is available 24/7 to help you
-          understand complex legal concepts and find answers to your questions.
+        <p className="text-amber-100 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+          {t("cta.description")}
         </p>
-        <Button className="bg-white hover:bg-gray-100 text-amber-600 font-semibold gap-2">
-          Start a Conversation <ArrowRight className="w-4 h-4" />
+        <Button className={`bg-white hover:bg-gray-100 text-amber-600 font-semibold gap-2 px-8 py-3 h-auto text-base rounded-lg transition-all duration-200 ${isRTL ? "flex-row-reverse" : ""}`}>
+          {t("cta.startConversation")} <ArrowRight className="w-4 h-4" />
         </Button>
       </section>
     </Layout>
