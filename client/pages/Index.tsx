@@ -67,6 +67,93 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Recent Updates & Most Viewed Section */}
+      <section className="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Recent Updates */}
+        <div>
+          <div className="mb-8 flex items-center gap-2">
+            <Clock className="w-6 h-6 text-amber-600" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Recent Updates
+            </h2>
+          </div>
+          <div className="space-y-4">
+            {laws
+              .sort((a, b) => new Date(b.lastUpdated).getTime() - new Date(a.lastUpdated).getTime())
+              .slice(0, 5)
+              .map((law) => {
+                const cat = categories.find((c) => c.id === law.category);
+                return (
+                  <Link
+                    key={law.id}
+                    to={`/law/${law.id}`}
+                    className="block p-4 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all bg-white group"
+                  >
+                    <div className="flex items-start justify-between gap-4 mb-2">
+                      <h3 className="font-semibold text-gray-900 group-hover:text-amber-600 transition-colors">
+                        {law.title}
+                      </h3>
+                      <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded whitespace-nowrap">
+                        {new Date(law.lastUpdated).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600 line-clamp-1">
+                      {law.description}
+                    </p>
+                    {cat && (
+                      <p className="text-xs text-gray-500 mt-2">{cat.title}</p>
+                    )}
+                  </Link>
+                );
+              })}
+          </div>
+        </div>
+
+        {/* Most Viewed */}
+        <div>
+          <div className="mb-8 flex items-center gap-2">
+            <Star className="w-6 h-6 text-amber-600" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              Most Viewed
+            </h2>
+          </div>
+          <div className="space-y-4">
+            {laws
+              .filter((l) => l.versions && l.versions.length > 0)
+              .slice(0, 5)
+              .map((law, idx) => {
+                const cat = categories.find((c) => c.id === law.category);
+                return (
+                  <Link
+                    key={law.id}
+                    to={`/law/${law.id}`}
+                    className="block p-4 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all bg-white group"
+                  >
+                    <div className="flex items-start gap-4 mb-2">
+                      <div className="flex items-center justify-center w-8 h-8 bg-amber-100 rounded-full flex-shrink-0">
+                        <span className="text-sm font-bold text-amber-700">
+                          {idx + 1}
+                        </span>
+                      </div>
+                      <h3 className="font-semibold text-gray-900 group-hover:text-amber-600 transition-colors flex-1">
+                        {law.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm text-gray-600 line-clamp-1 ml-12">
+                      {law.description}
+                    </p>
+                    {cat && (
+                      <p className="text-xs text-gray-500 mt-2 ml-12">
+                        {cat.title}
+                      </p>
+                    )}
+                  </Link>
+                );
+              })}
+          </div>
+        </div>
+      </section>
+
       {/* Categories Section */}
       <section id="categories" className="mb-20">
         <div className="mb-12">
