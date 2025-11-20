@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { categories, laws } from "@/data/laws";
@@ -9,6 +10,8 @@ import { ChatDrawer } from "@/components/ChatDrawer";
 
 export default function Law() {
   const { lawId } = useParams<{ lawId: string }>();
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === "ar";
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
   const [showVersionHistory, setShowVersionHistory] = useState(false);
