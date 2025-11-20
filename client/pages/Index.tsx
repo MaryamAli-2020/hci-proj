@@ -157,14 +157,13 @@ export default function Index() {
       </section>
 
       {/* Categories Section */}
-      <section id="categories" className="mb-20">
+      <section id="categories" className={`mb-24 ${isRTL ? "text-right" : ""}`}>
         <div className="mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Explore Legal Practice Areas
+            {t("categories.title")}
           </h2>
           <p className="text-gray-600 text-lg">
-            Choose from our comprehensive collection of legal topics and get
-            detailed information about each area.
+            {t("categories.description")}
           </p>
         </div>
 
