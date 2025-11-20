@@ -175,13 +175,13 @@ export default function Index() {
               to={`/category/${category.id}`}
               className="group"
             >
-              <div className="h-full rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:border-blue-300 hover:shadow-lg bg-white">
+              <div className="h-full rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:border-amber-400 hover:shadow-xl bg-white hover:shadow-amber-100">
                 {/* Card Header with Gradient */}
                 <div
-                  className={`h-32 bg-gradient-to-br ${category.color} relative overflow-hidden`}
+                  className={`h-32 bg-gradient-to-br ${category.color} relative overflow-hidden group-hover:scale-105 transition-transform duration-300`}
                 >
-                  <div className="absolute inset-0 opacity-20">
-                    <div className="absolute top-4 right-4 text-5xl">
+                  <div className="absolute inset-0 flex items-center justify-end pr-4 opacity-30 group-hover:opacity-40 transition-opacity">
+                    <div className="text-5xl">
                       {category.icon}
                     </div>
                   </div>
@@ -195,11 +195,11 @@ export default function Index() {
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                     {category.description}
                   </p>
-                  <div className="flex items-center justify-between">
+                  <div className={`flex items-center justify-between ${isRTL ? "flex-row-reverse" : ""}`}>
                     <span className="inline-flex items-center gap-1 px-3 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-full">
-                      {category.count} topics
+                      {category.count} {t("sections.topics")}
                     </span>
-                    <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-amber-600 group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className={`w-4 h-4 text-gray-400 group-hover:text-amber-600 transition-all ${isRTL ? "rotate-180" : "group-hover:translate-x-1"}`} />
                   </div>
                 </div>
               </div>
