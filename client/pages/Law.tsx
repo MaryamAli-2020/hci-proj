@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { categories, laws } from "@/data/laws";
-import { ArrowLeft, Share2, Bookmark, Check } from "lucide-react";
+import { ArrowLeft, Share2, Bookmark, Check, ChevronDown, Calendar, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ChatDrawer } from "@/components/ChatDrawer";
 
