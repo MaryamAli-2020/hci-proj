@@ -208,13 +208,124 @@ export default function Law() {
               </p>
             </div>
 
-            <div className="space-y-6">
-              {law.content.split("\n\n").map((paragraph, index) => (
-                <p key={index} className="leading-relaxed text-gray-700">
-                  {paragraph}
+            {/* AI Summary Section */}
+            {law.aiSummary && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+                <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <span className="text-xl">✨</span> AI Summary
+                </h3>
+                <p className="text-gray-700 leading-relaxed">
+                  {law.aiSummary}
                 </p>
-              ))}
-            </div>
+              </div>
+            )}
+
+            {/* Content Sections */}
+            {law.sections && law.sections.length > 0 ? (
+              <div className="space-y-4 mb-8">
+                <h3 className="text-lg font-bold text-gray-900">Key Sections</h3>
+                {law.sections.map((section, index) => (
+                  <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+                    <button
+                      onClick={() => toggleSection(section.title)}
+                      className="w-full px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors flex items-center justify-between"
+                    >
+                      <h4 className="font-semibold text-gray-900 text-left">
+                        {section.title}
+                      </h4>
+                      <ChevronDown
+                        className={`w-5 h-5 text-gray-500 transition-transform ${
+                          expandedSections.has(section.title) ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    {expandedSections.has(section.title) && (
+                      <div className="px-6 py-4 border-t border-gray-200 bg-white">
+                        <p className="text-gray-700 leading-relaxed">
+                          {section.content}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-6 mb-8">
+                {law.content.split("\n\n").map((paragraph, index) => (
+                  <p key={index} className="leading-relaxed text-gray-700">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            )}
+
+            {/* Version History */}
+            {law.versions && law.versions.length > 0 && (
+              <div className="bg-gray-50 rounded-lg p-6 mb-8">
+                <button
+                  onClick={() => setShowVersionHistory(!showVersionHistory)}
+                  className="w-full flex items-center justify-between mb-4 hover:bg-gray-100 p-2 rounded transition-colors"
+                >
+                  <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <Calendar className="w-5 h-5" />
+                    Version History
+                  </h3>
+                  <ChevronDown
+                    className={`w-5 h-5 text-gray-500 transition-transform ${
+                      showVersionHistory ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {showVersionHistory && (
+                  <div className="space-y-4 ml-4 border-l-2 border-amber-600 pl-6">
+                    {law.versions.map((version, index) => (
+                      <div key={index} className="pb-4 last:pb-0">
+                        <div className="absolute w-3 h-3 bg-amber-600 rounded-full -left-1.5 mt-2"></div>
+                        <div>
+                          <p className="font-semibold text-gray-900">
+                            {version.title}
+                          </p>
+                          <p className="text-sm text-gray-600 mb-2">
+                            {new Date(version.date).toLocaleDateString()}
+                          </p>
+                          <p className="text-gray-700">{version.changes}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Cross References */}
+            {law.crossReferences && law.crossReferences.length > 0 && (
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-8">
+                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <ExternalLink className="w-5 h-5" />
+                  Related Laws
+                </h3>
+                <div className="space-y-3">
+                  {law.crossReferences.map((refId) => {
+                    const refLaw = laws.find((l) => l.id === refId);
+                    return refLaw ? (
+                      <Link
+                        key={refId}
+                        to={`/law/${refLaw.id}`}
+                        className="block p-3 bg-white border border-purple-200 rounded hover:border-purple-400 hover:shadow-md transition-all"
+                      >
+                        <p className="font-semibold text-purple-700 hover:text-purple-900">
+                          {refLaw.title}
+                        </p>
+                        <p className="text-sm text-gray-600 mt-1">
+                          {refLaw.description}
+                        </p>
+                      </Link>
+                    ) : null;
+                  })}
+                </div>
+              </div>
+            )}
           </article>
         </div>
 
