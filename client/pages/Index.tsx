@@ -70,13 +70,13 @@ export default function Index() {
       </section>
 
       {/* Recent Updates & Most Viewed Section */}
-      <section className="mb-20 grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <section className="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Recent Updates */}
         <div>
-          <div className="mb-8 flex items-center gap-2">
-            <Clock className="w-6 h-6 text-amber-600" />
+          <div className={`mb-8 flex items-center gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
+            <Clock className="w-6 h-6 text-amber-600 flex-shrink-0" />
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Recent Updates
+              {t("sections.recentUpdates")}
             </h2>
           </div>
           <div className="space-y-4">
