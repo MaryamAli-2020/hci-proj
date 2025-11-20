@@ -163,18 +163,18 @@ export function Layout({ children }: LayoutProps) {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-gray-50 mt-12">
-        <div className="container max-w-7xl mx-auto px-4 py-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <footer className="border-t border-gray-200 bg-gray-50 mt-16">
+        <div className="container max-w-7xl mx-auto px-4 py-12">
+          <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 ${isRTL ? "text-right" : ""}`}>
             <div>
-              <h3 className="font-semibold text-gray-900 mb-4">Categories</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t("footer.categories")}</h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li>
                   <Link
                     to="/?category=criminal"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Criminal Law
+                    {t("footer.criminalLaw")}
                   </Link>
                 </li>
                 <li>
@@ -182,7 +182,7 @@ export function Layout({ children }: LayoutProps) {
                     to="/?category=corporate"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Corporate Law
+                    {t("footer.corporateLaw")}
                   </Link>
                 </li>
                 <li>
@@ -190,20 +190,20 @@ export function Layout({ children }: LayoutProps) {
                     to="/?category=family"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Family Law
+                    {t("footer.familyLaw")}
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900 mb-4">Resources</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t("footer.resources")}</h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li>
                   <a
                     href="#"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Help Center
+                    {t("footer.helpCenter")}
                   </a>
                 </li>
                 <li>
@@ -211,7 +211,7 @@ export function Layout({ children }: LayoutProps) {
                     href="#"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Blog
+                    {t("footer.blog")}
                   </a>
                 </li>
                 <li>
@@ -219,20 +219,20 @@ export function Layout({ children }: LayoutProps) {
                     href="#"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Contact
+                    {t("footer.contact")}
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900 mb-4">Legal</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t("footer.legal")}</h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li>
                   <a
                     href="#"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Privacy Policy
+                    {t("footer.privacyPolicy")}
                   </a>
                 </li>
                 <li>
@@ -240,7 +240,7 @@ export function Layout({ children }: LayoutProps) {
                     href="#"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Terms of Service
+                    {t("footer.termsOfService")}
                   </a>
                 </li>
                 <li>
@@ -248,20 +248,20 @@ export function Layout({ children }: LayoutProps) {
                     href="#"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Disclaimer
+                    {t("footer.disclaimer")}
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900 mb-4">Company</h3>
+              <h3 className="font-semibold text-gray-900 mb-4">{t("footer.company")}</h3>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li>
                   <a
                     href="#"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    About Us
+                    {t("footer.aboutUs")}
                   </a>
                 </li>
                 <li>
@@ -269,7 +269,7 @@ export function Layout({ children }: LayoutProps) {
                     href="#"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Careers
+                    {t("footer.careers")}
                   </a>
                 </li>
                 <li>
@@ -277,17 +277,14 @@ export function Layout({ children }: LayoutProps) {
                     href="#"
                     className="hover:text-amber-600 transition-colors"
                   >
-                    Updates
+                    {t("footer.updates")}
                   </a>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-600">
-            <p>
-              &copy; 2025 Qanoon. All rights reserved. This is educational
-              content and not legal advice.
-            </p>
+          <div className={`border-t border-gray-200 mt-8 pt-8 text-center text-sm text-gray-600 ${isRTL ? "text-right" : ""}`}>
+            <p dangerouslySetInnerHTML={{ __html: t("footer.copyright") }} />
           </div>
         </div>
       </footer>
