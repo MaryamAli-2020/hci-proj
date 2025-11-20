@@ -115,7 +115,7 @@ export default function Law() {
   return (
     <Layout>
       {/* Breadcrumb */}
-      <div className="mb-6 flex items-center gap-2 text-sm text-gray-600">
+      <div className={`mb-6 flex items-center gap-2 text-sm text-gray-600 ${isRTL ? "flex-row-reverse" : ""}`}>
         <Link to="/" className="hover:text-amber-600 transition-colors">
           Home
         </Link>
