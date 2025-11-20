@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { categories, laws } from "@/data/laws";
-import { ArrowRight, CheckCircle, Clock, Star, TrendingUp } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock, Star } from "lucide-react";
 
 export default function Index() {
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === "ar";
+
   return (
     <Layout>
       {/* Hero Section */}
