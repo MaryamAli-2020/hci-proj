@@ -215,7 +215,7 @@ export default function Law() {
             {law.aiSummary && (
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
                 <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <span className="text-xl">✨</span> AI Summary
+                  <span className="text-xl">✨</span> {t("law.aiSummary")}
                 </h3>
                 <p className="text-gray-700 leading-relaxed">
                   {law.aiSummary}
@@ -226,7 +226,7 @@ export default function Law() {
             {/* Content Sections */}
             {law.sections && law.sections.length > 0 ? (
               <div className="space-y-4 mb-8">
-                <h3 className="text-lg font-bold text-gray-900">Key Sections</h3>
+                <h3 className="text-lg font-bold text-gray-900">{t("law.sections")}</h3>
                 {law.sections.map((section, index) => (
                   <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
                     <button
