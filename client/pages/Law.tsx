@@ -383,7 +383,7 @@ export default function Law() {
       {relatedLaws.length > 0 && (
         <section className="border-t border-gray-200 pt-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Related Topics
+            Related Laws
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {relatedLaws.slice(0, 4).map((relatedLaw) => (
