@@ -1,9 +1,11 @@
 import { ReactNode, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, MessageSquare } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ChatDrawer } from "./ChatDrawer";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 interface LayoutProps {
   children: ReactNode;
