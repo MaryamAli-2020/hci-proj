@@ -31,13 +31,13 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Sticky Header */}
-      <header className="sticky top-0 z-50 border-b border-gray-200 bg-black">
+      <header className="sticky top-0 z-50 border-b border-gray-200 bg-slate-900">
         <div className="container max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-4">
+          <div className={`flex items-center justify-between gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
             {/* Logo and Home Link */}
             <Link
               to="/"
-              className="flex items-center gap-2 group"
+              className={`flex items-center gap-2 group ${isRTL ? "flex-row-reverse" : ""}`}
               aria-label="QANOON Home"
             >
               <img
@@ -45,35 +45,35 @@ export function Layout({ children }: LayoutProps) {
                 alt="QANOON"
                 className="h-10 w-auto hidden sm:block"
               />
-              <span className="font-semibold text-lg text-white hidden sm:inline group-hover:text-amber-400 transition-colors">
+              <span className="font-bold text-xl text-white hidden sm:inline group-hover:text-amber-500 transition-colors">
                 QANOON
               </span>
             </Link>
 
             {/* Navigation Links - Hidden on Mobile */}
-            <nav className="hidden md:flex items-center gap-6">
+            <nav className={`hidden md:flex items-center gap-8 ${isRTL ? "flex-row-reverse" : ""}`}>
               <Link
                 to="/"
-                className="text-white hover:text-amber-400 transition-colors font-medium text-sm"
+                className="text-gray-200 hover:text-amber-400 transition-colors font-medium text-sm"
               >
-                Browse
+                {t("header.browse")}
               </Link>
               <a
                 href="#features"
-                className="text-white hover:text-amber-400 transition-colors font-medium text-sm"
+                className="text-gray-200 hover:text-amber-400 transition-colors font-medium text-sm"
               >
-                Features
+                {t("header.features")}
               </a>
               <a
                 href="#about"
-                className="text-white hover:text-amber-400 transition-colors font-medium text-sm"
+                className="text-gray-200 hover:text-amber-400 transition-colors font-medium text-sm"
               >
-                About
+                {t("header.about")}
               </a>
             </nav>
 
             {/* Search and Action Buttons */}
-            <div className="flex items-center gap-2 sm:gap-3">
+            <div className={`flex items-center gap-2 sm:gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
               {/* Search - Responsive */}
               <form
                 onSubmit={handleSearch}
@@ -81,27 +81,30 @@ export function Layout({ children }: LayoutProps) {
               >
                 <Input
                   type="text"
-                  placeholder="Search laws..."
+                  placeholder={t("header.searchPlaceholder")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-48 h-9 text-sm pr-3 border-gray-300 bg-gray-900 text-white placeholder-gray-400"
+                  className="w-48 h-9 text-sm pr-3 border-gray-600 bg-slate-800 text-white placeholder-gray-500"
                   aria-label="Search laws"
                 />
                 <button
                   type="submit"
-                  className="absolute right-3 text-gray-400 hover:text-gray-600"
+                  className="absolute right-3 text-gray-500 hover:text-gray-300"
                   aria-label="Submit search"
                 >
                   <Search className="w-4 h-4" />
                 </button>
               </form>
 
+              {/* Language Switcher */}
+              <LanguageSwitcher />
+
               {/* Mobile Search Button */}
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="sm:hidden"
+                className="sm:hidden text-gray-300 hover:text-white"
                 aria-label="Open search"
               >
                 <Search className="w-5 h-5" />
@@ -110,12 +113,12 @@ export function Layout({ children }: LayoutProps) {
               {/* Chat Button */}
               <Button
                 onClick={() => setIsChatOpen(true)}
-                className="bg-amber-600 hover:bg-amber-700 text-white gap-2 hidden sm:flex"
+                className="bg-amber-600 hover:bg-amber-700 text-white gap-2 hidden sm:flex font-medium"
                 size="sm"
                 aria-label="Open AI chat assistant"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>Ask AI</span>
+                <span>{t("header.askAI")}</span>
               </Button>
 
               {/* Chat Button - Mobile */}
@@ -123,7 +126,7 @@ export function Layout({ children }: LayoutProps) {
                 onClick={() => setIsChatOpen(true)}
                 variant="ghost"
                 size="sm"
-                className="sm:hidden"
+                className="sm:hidden text-gray-300 hover:text-white"
                 aria-label="Open AI chat assistant"
               >
                 <MessageSquare className="w-5 h-5" />
