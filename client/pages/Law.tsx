@@ -306,7 +306,7 @@ export default function Law() {
               <div className="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-8">
                 <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <ExternalLink className="w-5 h-5" />
-                  Related Laws
+                  {t("law.relatedLaws")}
                 </h3>
                 <div className="space-y-3">
                   {law.crossReferences.map((refId) => {
