@@ -12,10 +12,12 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
+  const { t, i18n } = useTranslation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isChatOpen, setIsChatOpen] = useState(false);
   const navigate = useNavigate();
+  const isRTL = i18n.language === "ar";
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
