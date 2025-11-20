@@ -352,7 +352,7 @@ export default function Law() {
               <div>
                 <dt className="text-gray-500 font-medium mb-1">Last Updated</dt>
                 <dd className="text-gray-700">
-                  {new Date(law.lastUpdated).toLocaleDateString()}
+                  {new Date(law.lastUpdated).toLocaleDateString(i18n.language === "ar" ? "ar-AE" : "en-US")}
                 </dd>
               </div>
               <div>
@@ -373,7 +373,7 @@ export default function Law() {
               onClick={() => setIsChatOpen(true)}
               className="w-full bg-white hover:bg-gray-100 text-amber-600 font-semibold"
             >
-              Ask AI Assistant
+              {t("law.askAIAssistant")}
             </Button>
           </div>
         </div>
