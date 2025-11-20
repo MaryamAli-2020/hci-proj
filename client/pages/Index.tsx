@@ -113,10 +113,10 @@ export default function Index() {
 
         {/* Most Viewed */}
         <div>
-          <div className="mb-8 flex items-center gap-2">
-            <Star className="w-6 h-6 text-amber-600" />
+          <div className={`mb-8 flex items-center gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
+            <Star className="w-6 h-6 text-amber-600 flex-shrink-0" />
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              Most Viewed
+              {t("sections.mostViewed")}
             </h2>
           </div>
           <div className="space-y-4">
