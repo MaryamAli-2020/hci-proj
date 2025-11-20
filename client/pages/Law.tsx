@@ -10,11 +10,23 @@ import { ChatDrawer } from "@/components/ChatDrawer";
 export default function Law() {
   const { lawId } = useParams<{ lawId: string }>();
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
+  const [showVersionHistory, setShowVersionHistory] = useState(false);
   const [savedLaws, setSavedLaws] = useState<Set<string>>(() => {
     const saved = localStorage.getItem("savedLaws");
     return new Set(saved ? JSON.parse(saved) : []);
   });
   const { toast } = useToast();
+
+  const toggleSection = (sectionTitle: string) => {
+    const newExpanded = new Set(expandedSections);
+    if (newExpanded.has(sectionTitle)) {
+      newExpanded.delete(sectionTitle);
+    } else {
+      newExpanded.add(sectionTitle);
+    }
+    setExpandedSections(newExpanded);
+  };
 
   const law = laws.find((l) => l.id === lawId);
   const category = categories.find((c) => c.id === law?.category);
