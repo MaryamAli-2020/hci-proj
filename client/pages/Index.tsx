@@ -12,59 +12,57 @@ export default function Index() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="mb-16">
-        <div className="max-w-4xl mx-auto text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            Understand the Law with <span className="text-amber-600">Qanoon</span>
+      <section className="mb-24 -mx-4 sm:mx-0 px-4 sm:px-0 py-16 sm:py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-none sm:rounded-lg">
+        <div className={`max-w-4xl mx-auto text-center mb-12 ${isRTL ? "text-right" : ""}`}>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            {t("hero.title")} <span className="text-amber-500">Qanoon</span>
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 mb-8">
-            Explore comprehensive legal information across multiple practice
-            areas. Get answers to your questions with our AI-powered assistant
-            available 24/7.
+          <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+            {t("hero.description")}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-amber-600 hover:bg-amber-700 text-white gap-2 px-6 py-2 h-auto text-base">
-              Explore Categories <ArrowRight className="w-4 h-4" />
+          <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL ? "flex-row-reverse" : ""}`}>
+            <Button className="bg-amber-600 hover:bg-amber-700 text-white gap-2 px-8 py-3 h-auto text-base font-semibold rounded-lg transition-all duration-200">
+              {t("hero.exploreCategories")} <ArrowRight className="w-4 h-4" />
             </Button>
             <Button
               variant="outline"
-              className="border-gray-300 text-gray-900 gap-2 px-6 py-2 h-auto text-base"
+              className="border-gray-400 text-white hover:bg-gray-700 gap-2 px-8 py-3 h-auto text-base font-semibold rounded-lg"
             >
-              Ask AI Legal Assistant
+              {t("hero.askLegalAssistant")}
             </Button>
           </div>
         </div>
 
         {/* Features Overview */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          <div className="flex items-start gap-3">
-            <CheckCircle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
+        <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto px-4 ${isRTL ? "text-right" : ""}`}>
+          <div className="flex items-start gap-4">
+            <CheckCircle className="w-7 h-7 text-amber-500 flex-shrink-0 mt-1" />
             <div>
-              <h3 className="font-semibold text-gray-900 mb-1">
-                Comprehensive Coverage
+              <h3 className="font-semibold text-white mb-2 text-base">
+                {t("features.comprehensiveCoverage")}
               </h3>
-              <p className="text-sm text-gray-600">
-                Access information across multiple legal practice areas
+              <p className="text-sm text-gray-300">
+                {t("features.comprehensiveCoverageDesc")}
               </p>
             </div>
           </div>
-          <div className="flex items-start gap-3">
-            <CheckCircle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
+          <div className="flex items-start gap-4">
+            <CheckCircle className="w-7 h-7 text-amber-500 flex-shrink-0 mt-1" />
             <div>
-              <h3 className="font-semibold text-gray-900 mb-1">AI Assistant</h3>
-              <p className="text-sm text-gray-600">
-                Get instant answers and explanations from our AI assistant
+              <h3 className="font-semibold text-white mb-2 text-base">{t("features.aiAssistant")}</h3>
+              <p className="text-sm text-gray-300">
+                {t("features.aiAssistantDesc")}
               </p>
             </div>
           </div>
-          <div className="flex items-start gap-3">
-            <CheckCircle className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
+          <div className="flex items-start gap-4">
+            <CheckCircle className="w-7 h-7 text-amber-500 flex-shrink-0 mt-1" />
             <div>
-              <h3 className="font-semibold text-gray-900 mb-1">
-                Always Available
+              <h3 className="font-semibold text-white mb-2 text-base">
+                {t("features.alwaysAvailable")}
               </h3>
-              <p className="text-sm text-gray-600">
-                Access legal information anytime, anywhere from any device
+              <p className="text-sm text-gray-300">
+                {t("features.alwaysAvailableDesc")}
               </p>
             </div>
           </div>
