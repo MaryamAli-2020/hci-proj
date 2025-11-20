@@ -271,7 +271,7 @@ export default function Law() {
                 >
                   <h3 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                     <Calendar className="w-5 h-5" />
-                    Version History
+                    {t("law.versionHistory")}
                   </h3>
                   <ChevronDown
                     className={`w-5 h-5 text-gray-500 transition-transform ${
