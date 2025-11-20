@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
-import { categories } from "@/data/laws";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { categories, laws } from "@/data/laws";
+import { ArrowRight, CheckCircle, Clock, Star, TrendingUp } from "lucide-react";
 
 export default function Index() {
   return (
