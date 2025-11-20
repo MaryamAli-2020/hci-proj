@@ -138,18 +138,18 @@ export function Layout({ children }: LayoutProps) {
           {searchOpen && (
             <form
               onSubmit={handleSearch}
-              className="mt-4 flex sm:hidden items-center gap-2"
+              className={`mt-4 flex sm:hidden items-center gap-2 ${isRTL ? "flex-row-reverse" : ""}`}
             >
               <Input
                 type="text"
-                placeholder="Search laws..."
+                placeholder={t("header.searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
                 className="flex-1 text-sm"
                 aria-label="Search laws"
               />
-              <Button type="submit" size="sm" className="bg-amber-600">
+              <Button type="submit" size="sm" className="bg-amber-600 hover:bg-amber-700">
                 <Search className="w-4 h-4" />
               </Button>
             </form>
