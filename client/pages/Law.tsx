@@ -47,7 +47,7 @@ export default function Law() {
           <Link to="/">
             <Button className="bg-amber-600 hover:bg-amber-700 text-white gap-2">
               <ArrowLeft className="w-4 h-4" />
-              Back to Home
+              {t("common.back")}
             </Button>
           </Link>
         </div>
