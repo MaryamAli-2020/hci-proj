@@ -4,9 +4,10 @@ import { useTranslation } from "react-i18next";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { categories, laws } from "@/data/laws";
-import { ArrowLeft, Share2, Bookmark, Check, ChevronDown, Calendar, ExternalLink } from "lucide-react";
+import { ArrowLeft, Share2, Bookmark, Check, ChevronDown, Calendar, ExternalLink, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { ChatDrawer } from "@/components/ChatDrawer";
+import { useEffect } from "react";
 
 export default function Law() {
   const { lawId } = useParams<{ lawId: string }>();
@@ -20,6 +21,11 @@ export default function Law() {
     return new Set(saved ? JSON.parse(saved) : []);
   });
   const { toast } = useToast();
+
+  // Scroll to top when law changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [lawId]);
 
   const toggleSection = (sectionTitle: string) => {
     const newExpanded = new Set(expandedSections);
@@ -45,7 +51,7 @@ export default function Law() {
             The law information you're looking for doesn't exist.
           </p>
           <Link to="/">
-            <Button className="bg-amber-600 hover:bg-amber-700 text-white gap-2">
+            <Button className="bg-black hover:bg-gray-900 text-white gap-2">
               <ArrowLeft className="w-4 h-4" />
               {t("common.back")}
             </Button>
@@ -116,13 +122,13 @@ export default function Law() {
     <Layout>
       {/* Breadcrumb */}
       <div className={`mb-6 flex items-center gap-2 text-sm text-gray-600 ${isRTL ? "flex-row-reverse" : ""}`}>
-        <Link to="/" className="hover:text-amber-600 transition-colors">
+        <Link to="/" className="hover:text-black transition-colors">
           Home
         </Link>
         <span>/</span>
         <Link
           to={`/category/${category.id}`}
-          className="hover:text-amber-600 transition-colors"
+          className="hover:text-black transition-colors"
         >
           {category.title}
         </Link>
@@ -133,7 +139,7 @@ export default function Law() {
       {/* Header */}
       <div className="mb-8 pb-8 border-b border-gray-200">
         <div className="mb-4">
-          <span className="inline-block px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-semibold">
+          <span className="inline-block px-3 py-1 bg-black text-[#BF9140] rounded-sm text-sm font-semibold\">
             {category.title}
           </span>
         </div>
@@ -155,9 +161,9 @@ export default function Law() {
                 })}
               </span>
             </div>
-            <div className="inline-block px-3 py-2 bg-amber-50 border-l-4 border-amber-600 text-sm">
-              <p className="text-gray-900 font-semibold">Legal Reference</p>
-              <p className="text-amber-700 font-mono text-xs mt-1">
+            <div className="inline-block px-3 py-2 border-l-4 border-[#BF9140] text-sm">
+              <p className="text-black font-semibold">Legal Reference</p>
+              <p className="text-[#BF9140] font-mono text-xs mt-1">
                 {law.legalReference}
               </p>
             </div>
@@ -169,7 +175,7 @@ export default function Law() {
               size="sm"
               className={`gap-2 ${
                 savedLaws.has(law.id)
-                  ? "bg-amber-600 hover:bg-amber-700 text-white border-amber-600"
+                  ? "bg-[#BF9140] hover:bg-[#A67C2E] text-white border-[#BF9140]"
                   : "border-gray-300"
               }`}
               aria-label="Save this law"
@@ -187,7 +193,7 @@ export default function Law() {
               onClick={handleShare}
               variant="outline"
               size="sm"
-              className="gap-2 border-gray-300 hover:border-amber-600 hover:text-amber-600"
+              className="gap-2 border-gray-300 hover:border-black hover:text-black\"
               aria-label="Share this law"
             >
               <Share2 className="w-4 h-4" />
@@ -202,8 +208,8 @@ export default function Law() {
         {/* Content */}
         <div className="lg:col-span-2">
           <article className="prose prose-sm max-w-none text-gray-700">
-            <div className="bg-amber-50 border-l-4 border-amber-600 p-4 rounded mb-6">
-              <p className="text-sm">
+            <div className=" border-l-4 border-[#BF9140] p-4 rounded-sm mb-6">
+              <p className="text-sm text-white\">
                 <strong>Disclaimer:</strong> This information is provided for
                 educational purposes only and is not legal advice. For legal
                 advice, please consult with a qualified attorney licensed in
@@ -215,7 +221,7 @@ export default function Law() {
             {law.aiSummary && (
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
                 <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <span className="text-xl">✨</span> {t("law.aiSummary")}
+                  <Sparkles className="w-5 h-5 text-blue-600" /> {t("law.aiSummary")}
                 </h3>
                 <p className="text-gray-700 leading-relaxed">
                   {law.aiSummary}
@@ -281,10 +287,10 @@ export default function Law() {
                 </button>
 
                 {showVersionHistory && (
-                  <div className="space-y-4 ml-4 border-l-2 border-amber-600 pl-6">
+                  <div className="space-y-4 ml-4 border-l-2 border-[#08AA78] pl-6">
                     {law.versions.map((version, index) => (
                       <div key={index} className="pb-4 last:pb-0">
-                        <div className="absolute w-3 h-3 bg-amber-600 rounded-full -left-1.5 mt-2"></div>
+                        <div className="absolute w-3 h-3 bg-[#08AA78] rounded-full -left-1.5 mt-2"></div>
                         <div>
                           <p className="font-semibold text-gray-900">
                             {version.title}
@@ -343,7 +349,7 @@ export default function Law() {
                 <dd>
                   <Link
                     to={`/category/${category.id}`}
-                    className="text-amber-600 hover:text-amber-700 font-semibold"
+                    className="text-black hover:text-[#BF9140] font-semibold\"
                   >
                     {category.title}
                   </Link>
@@ -363,15 +369,15 @@ export default function Law() {
           </div>
 
           {/* Need Help */}
-          <div className="bg-amber-600 text-white rounded-lg p-6">
+          <div className="bg-[#BF9140] text-white rounded-sm p-6">
             <h3 className="font-bold mb-2">Need Legal Help?</h3>
-            <p className="text-sm text-amber-100 mb-4">
+            <p className="text-sm text-gray-100 mb-4">
               Use our AI assistant to ask questions or get more information about
               this topic.
             </p>
             <Button
               onClick={() => setIsChatOpen(true)}
-              className="w-full bg-white hover:bg-gray-100 text-amber-600 font-semibold"
+              className="w-full bg-white hover:bg-gray-100 text-[#BF9140] font-semibold"
             >
               {t("law.askAIAssistant")}
             </Button>
@@ -392,8 +398,8 @@ export default function Law() {
                 to={`/law/${relatedLaw.id}`}
                 className="group"
               >
-                <div className="border border-gray-200 rounded-lg p-4 transition-all duration-300 hover:border-amber-300 hover:shadow-md bg-white hover:bg-amber-50 h-full">
-                  <h3 className="font-semibold text-gray-900 group-hover:text-amber-600 transition-colors mb-2">
+                <div className="border border-gray-200 rounded-sm p-4 transition-all duration-300 hover:border-[#BF9140] hover:shadow-md bg-white hover:bg-black hover:bg-opacity-5 h-full">
+                  <h3 className="font-semibold text-gray-900 group-hover:text-[#BF9140] transition-colors mb-2\">
                     {relatedLaw.title}
                   </h3>
                   <p className="text-sm text-gray-600 line-clamp-2">

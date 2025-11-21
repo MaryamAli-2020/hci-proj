@@ -3,7 +3,20 @@ import { useTranslation } from "react-i18next";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { categories, laws } from "@/data/laws";
-import { ArrowRight, CheckCircle, Clock, Star } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock, Star, Users, FileText, Scale, Heart, Building2, Lightbulb } from "lucide-react";
+
+// Map category IDs to their respective icons
+const getCategoryIcon = (categoryId: string) => {
+  const iconMap: { [key: string]: React.ReactNode } = {
+    labor: <Users className="w-16 h-16 text-gray-400" />,
+    civil: <FileText className="w-16 h-16 text-gray-400" />,
+    criminal: <Scale className="w-16 h-16 text-gray-400" />,
+    family: <Heart className="w-16 h-16 text-gray-400" />,
+    corporate: <Building2 className="w-16 h-16 text-gray-400" />,
+    intellectual: <Lightbulb className="w-16 h-16 text-gray-400" />,
+  };
+  return iconMap[categoryId] || <FileText className="w-16 h-16 text-gray-400" />;
+};
 
 export default function Index() {
   const { t, i18n } = useTranslation();
@@ -12,21 +25,21 @@ export default function Index() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="mb-24 -mx-4 sm:mx-0 px-4 sm:px-0 py-16 sm:py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-none sm:rounded-lg">
+      <section className="mb-24 -mx-4 sm:mx-0 px-4 sm:px-0 py-20 sm:py-28 bg-gradient-to-br from-black via-gray-900 to-black rounded-none sm:rounded-lg">
         <div className={`max-w-4xl mx-auto text-center mb-12 ${isRTL ? "text-right" : ""}`}>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-            {t("hero.title")} <span className="text-amber-500">Qanoon</span>
+            {t("hero.title")} <span className="text-[#BF9140]">Qanoon</span>
           </h1>
-          <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-100 mb-10 max-w-2xl mx-auto leading-relaxed">
             {t("hero.description")}
           </p>
           <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL ? "flex-row-reverse" : ""}`}>
-            <Button className="bg-amber-600 hover:bg-amber-700 text-white gap-2 px-8 py-3 h-auto text-base font-semibold rounded-lg transition-all duration-200">
+            <Button className="bg-[#BF9140] hover:bg-[#A67C2E] text-white gap-2 px-8 py-3 h-auto text-base font-semibold rounded-sm transition-all duration-200">
               {t("hero.exploreCategories")} <ArrowRight className="w-4 h-4" />
             </Button>
             <Button
               variant="outline"
-              className="border-gray-400 text-white hover:bg-gray-700 gap-2 px-8 py-3 h-auto text-base font-semibold rounded-lg"
+              className="border-gray-300 text-white hover:bg-gray-700 gap-2 px-8 py-3 h-auto text-base font-semibold rounded-sm bg-gray-800 bg-opacity-50"
             >
               {t("hero.askLegalAssistant")}
             </Button>
@@ -36,32 +49,32 @@ export default function Index() {
         {/* Features Overview */}
         <div className={`grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto px-4 ${isRTL ? "text-right" : ""}`}>
           <div className="flex items-start gap-4">
-            <CheckCircle className="w-7 h-7 text-amber-500 flex-shrink-0 mt-1" />
+            <CheckCircle className="w-7 h-7 text-[#08AA78] flex-shrink-0 mt-1" />
             <div>
               <h3 className="font-semibold text-white mb-2 text-base">
                 {t("features.comprehensiveCoverage")}
               </h3>
-              <p className="text-sm text-gray-300">
+              <p className="text-sm text-gray-100">
                 {t("features.comprehensiveCoverageDesc")}
               </p>
             </div>
           </div>
           <div className="flex items-start gap-4">
-            <CheckCircle className="w-7 h-7 text-amber-500 flex-shrink-0 mt-1" />
+            <CheckCircle className="w-7 h-7 text-[#08AA78] flex-shrink-0 mt-1" />
             <div>
               <h3 className="font-semibold text-white mb-2 text-base">{t("features.aiAssistant")}</h3>
-              <p className="text-sm text-gray-300">
+              <p className="text-sm text-gray-100">
                 {t("features.aiAssistantDesc")}
               </p>
             </div>
           </div>
           <div className="flex items-start gap-4">
-            <CheckCircle className="w-7 h-7 text-amber-500 flex-shrink-0 mt-1" />
+            <CheckCircle className="w-7 h-7 text-[#08AA78] flex-shrink-0 mt-1" />
             <div>
               <h3 className="font-semibold text-white mb-2 text-base">
                 {t("features.alwaysAvailable")}
               </h3>
-              <p className="text-sm text-gray-300">
+              <p className="text-sm text-gray-100">
                 {t("features.alwaysAvailableDesc")}
               </p>
             </div>
@@ -74,7 +87,7 @@ export default function Index() {
         {/* Recent Updates */}
         <div>
           <div className={`mb-8 flex items-center gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
-            <Clock className="w-6 h-6 text-amber-600 flex-shrink-0" />
+            <Clock className="w-6 h-6 text-black flex-shrink-0" />
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
               {t("sections.recentUpdates")}
             </h2>
@@ -89,13 +102,13 @@ export default function Index() {
                   <Link
                     key={law.id}
                     to={`/law/${law.id}`}
-                    className="block p-4 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all bg-white group"
+                    className="block p-4 border border-gray-200 rounded-sm hover:border-red-400 hover:shadow-md transition-all bg-white group"
                   >
                     <div className="flex items-start justify-between gap-4 mb-2">
-                      <h3 className="font-semibold text-gray-900 group-hover:text-amber-600 transition-colors">
+                      <h3 className="font-semibold text-gray-900 group-hover:text-red-700 transition-colors">
                         {law.title}
                       </h3>
-                      <span className="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded whitespace-nowrap">
+                      <span className="text-xs bg-blue-100 text-blue-900 px-2 py-1 rounded-sm whitespace-nowrap font-medium">
                         {new Date(law.lastUpdated).toLocaleDateString()}
                       </span>
                     </div>
@@ -114,7 +127,7 @@ export default function Index() {
         {/* Most Viewed */}
         <div>
           <div className={`mb-8 flex items-center gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
-            <Star className="w-6 h-6 text-amber-600 flex-shrink-0" />
+            <Star className="w-6 h-6 text-black flex-shrink-0" />
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
               {t("sections.mostViewed")}
             </h2>
@@ -129,15 +142,15 @@ export default function Index() {
                   <Link
                     key={law.id}
                     to={`/law/${law.id}`}
-                    className="block p-4 border border-gray-200 rounded-lg hover:border-amber-300 hover:shadow-md transition-all bg-white group"
+                    className="block p-4 border border-gray-200 rounded-sm hover:border-[#BF9140] hover:shadow-md transition-all bg-white group"
                   >
                     <div className="flex items-start gap-4 mb-2">
-                      <div className="flex items-center justify-center w-8 h-8 bg-amber-100 rounded-full flex-shrink-0">
-                        <span className="text-sm font-bold text-amber-700">
+                      <div className="flex items-center justify-center w-8 h-8 bg-black rounded-sm flex-shrink-0">
+                        <span className="text-sm font-bold text-[#BF9140]">
                           {idx + 1}
                         </span>
                       </div>
-                      <h3 className="font-semibold text-gray-900 group-hover:text-amber-600 transition-colors flex-1">
+                      <h3 className="font-semibold text-gray-900 group-hover:text-[#BF9140] transition-colors flex-1">
                         {law.title}
                       </h3>
                     </div>
@@ -175,31 +188,29 @@ export default function Index() {
               to={`/category/${category.id}`}
               className="group"
             >
-              <div className="h-full rounded-xl border border-gray-200 overflow-hidden transition-all duration-300 hover:border-amber-400 hover:shadow-xl bg-white hover:shadow-amber-100">
+              <div className="h-full rounded-sm border border-gray-200 overflow-hidden transition-all duration-300 hover:border-[#BF9140] hover:shadow-lg bg-white">
                 {/* Card Header with Gradient */}
                 <div
-                  className={`h-32 bg-gradient-to-br ${category.color} relative overflow-hidden group-hover:scale-105 transition-transform duration-300`}
+                  className={`h-32 bg-gradient-to-br from-black to-gray-900 relative overflow-hidden flex items-center justify-end pr-4`}
                 >
-                  <div className="absolute inset-0 flex items-center justify-end pr-4 opacity-30 group-hover:opacity-40 transition-opacity">
-                    <div className="text-5xl">
-                      {category.icon}
-                    </div>
+                  <div className="opacity-20">
+                    {getCategoryIcon(category.id)}
                   </div>
                 </div>
 
                 {/* Card Body */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#BF9140] transition-colors">
                     {category.title}
                   </h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                     {category.description}
                   </p>
                   <div className={`flex items-center justify-between ${isRTL ? "flex-row-reverse" : ""}`}>
-                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-amber-50 text-amber-700 text-xs font-semibold rounded-full">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 text-[#BF9140] text-xs font-semibold rounded-sm">
                       {category.count} {t("sections.topics")}
                     </span>
-                    <ArrowRight className={`w-4 h-4 text-gray-400 group-hover:text-amber-600 transition-all ${isRTL ? "rotate-180" : "group-hover:translate-x-1"}`} />
+                    <ArrowRight className={`w-4 h-4 text-gray-400 group-hover:text-[#BF9140] transition-all ${isRTL ? "rotate-180" : "group-hover:translate-x-1"}`} />
                   </div>
                 </div>
               </div>
@@ -209,14 +220,14 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className={`rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 text-white py-16 px-8 text-center ${isRTL ? "text-right" : ""}`}>
+      <section className={`rounded-sm bg-[#BF9140] text-white py-16 px-8 text-center ${isRTL ? "text-right" : ""}`}>
         <h2 className="text-3xl sm:text-4xl font-bold mb-4">
           {t("cta.title")}
         </h2>
-        <p className="text-amber-100 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-gray-100 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
           {t("cta.description")}
         </p>
-        <Button className={`bg-white hover:bg-gray-100 text-amber-600 font-semibold gap-2 px-8 py-3 h-auto text-base rounded-lg transition-all duration-200 ${isRTL ? "flex-row-reverse" : ""}`}>
+        <Button className={`bg-white hover:bg-gray-100 text-black font-semibold gap-2 px-8 py-3 h-auto text-base rounded-sm transition-all duration-200 ${isRTL ? "flex-row-reverse" : ""}`}>
           {t("cta.startConversation")} <ArrowRight className="w-4 h-4" />
         </Button>
       </section>

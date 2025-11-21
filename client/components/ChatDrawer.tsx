@@ -1,9 +1,67 @@
 import { useEffect, useRef, useState } from "react";
-import { X, Send, AlertCircle } from "lucide-react";
+import { X, Send, AlertCircle, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AiAssistantResponse, LawReference } from "@shared/api";
 import type { Law } from "@shared/laws";
+import { useNavigate } from "react-router-dom";
+
+// Markdown renderer component
+function MarkdownContent({ text, references }: { text: string; references?: LawReference[] }) {
+  const navigate = useNavigate();
+  
+  // Parse text to handle bold, links, and law references
+  const renderMarkdown = (content: string) => {
+    // First split by newlines to preserve line breaks
+    const lines = content.split('\n');
+    
+    return lines.map((line, lineIdx) => {
+      // Split by bold pattern **text**
+      const parts = line.split(/(\*\*[^*]+\*\*)/g);
+      
+      const renderedParts = parts.map((part, idx) => {
+        // Handle bold text
+        if (part.startsWith("**") && part.endsWith("**")) {
+          const boldText = part.slice(2, -2);
+          return <strong key={idx}>{boldText}</strong>;
+        }
+        
+        // Handle law references [lawid]
+        if (part.match(/\[([a-z]+-\d+)\]/gi)) {
+          const subParts = part.split(/(\[[a-z]+-\d+\])/gi);
+          return subParts.map((subPart, subIdx) => {
+            const refMatch = subPart.match(/\[([a-z]+-\d+)\]/i);
+            if (refMatch) {
+              const lawId = refMatch[1].toLowerCase();
+              const reference = references?.find(r => r.lawId === lawId);
+              return (
+                <button
+                  key={`${idx}-${subIdx}`}
+                  onClick={() => navigate(`/law/${lawId}`)}
+                  className="inline text-blue-600 hover:text-blue-800 hover:underline cursor-pointer font-medium"
+                  title={reference?.title}
+                >
+                  [{lawId}]
+                </button>
+              );
+            }
+            return subPart;
+          });
+        }
+        
+        return part;
+      });
+      
+      return (
+        <div key={lineIdx} className="whitespace-pre-wrap">
+          {renderedParts}
+        </div>
+      );
+    });
+  };
+  
+  return <div className="text-sm leading-relaxed">{renderMarkdown(text)}</div>;
+}
 
 interface Message {
   id: string;
@@ -20,6 +78,8 @@ interface ChatDrawerProps {
 }
 
 export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
+  const navigate = useNavigate();
+  
   const getInitialMessage = (): string => {
     if (contextLaw) {
       return `Assalamu Alaikum! 👋 I see you're reading about "${contextLaw.title}". I'm your UAE Legal AI Assistant. I can help you understand this law in detail, answer specific questions about it, or connect it to related laws. What would you like to know?`;
@@ -165,11 +225,14 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
                     ? "bg-amber-600 text-white rounded-br-none"
                     : "bg-gray-100 text-gray-900 rounded-bl-none"
                 }`}
-                role={message.sender === "user" ? "listitem" : "article"}
               >
-                <p className="text-sm leading-relaxed whitespace-pre-wrap">
-                  {message.text}
-                </p>
+                <div className={message.sender === "user" ? "text-white" : "text-gray-900"}>
+                  {message.sender === "user" ? (
+                    <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.text}</p>
+                  ) : (
+                    <MarkdownContent text={message.text} references={message.references} />
+                  )}
+                </div>
 
                 {/* Law References */}
                 {message.references && message.references.length > 0 && (
@@ -178,11 +241,13 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
                       Legal References:
                     </p>
                     {message.references.map((ref) => (
-                      <div
+                      <button
                         key={ref.lawId}
-                        className="text-xs bg-white/50 p-2 rounded border-l-2 border-amber-500"
+                        onClick={() => navigate(`/law/${ref.lawId}`)}
+                        className="w-full text-left text-xs bg-white/50 hover:bg-white/80 transition-colors p-2 rounded border-l-2 border-amber-500 cursor-pointer hover:shadow-md"
+                        type="button"
                       >
-                        <p className="font-semibold text-gray-800">
+                        <p className="font-semibold text-blue-600 hover:text-blue-800">
                           {ref.title}
                         </p>
                         <p className="text-gray-700 mt-1">
@@ -191,7 +256,7 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
                         <p className="text-gray-600 mt-1 italic">
                           {ref.excerpt}...
                         </p>
-                      </div>
+                      </button>
                     ))}
                   </div>
                 )}
@@ -255,8 +320,9 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
               <Send className="w-4 h-4" />
             </Button>
           </form>
-          <p className="text-xs text-gray-500 mt-2">
-            💡 This AI references actual UAE laws. Always consult a licensed
+          <p className="text-xs text-gray-500 mt-2 flex items-center gap-2">
+            <Lightbulb className="w-4 h-4 flex-shrink-0" />
+            This AI references actual UAE laws. Always consult a licensed
             attorney for legal advice.
           </p>
         </div>

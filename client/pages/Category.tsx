@@ -2,10 +2,54 @@ import { useParams, Link } from "react-router-dom";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { categories, laws } from "@/data/laws";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useEffect } from "react";
+import { ArrowLeft, ArrowRight, Users, FileText, Scale, Heart, Building2, Lightbulb } from "lucide-react";
+
+// Map category IDs to their gradient styles
+const getCategoryGradient = (categoryId: string): string => {
+  const gradientMap: { [key: string]: string } = {
+    labor: "from-teal-700 to-green-500",
+    civil: "from-teal-700 to-green-500",
+    criminal: "from-teal-700 to-green-500",
+    family: "from-teal-700 to-green-500",
+    corporate: "from-teal-700 to-green-500",
+    intellectual: "from-teal-700 to-green-500",
+  };
+  return gradientMap[categoryId] || "from-blue-500 to-cyan-500";
+};
+
+// Map category IDs to their respective icons
+const getCategoryIcon = (categoryId: string) => {
+  const iconMap: { [key: string]: React.ReactNode } = {
+    labor: <Users className="w-6 h-6 text-gray-600" />,
+    civil: <FileText className="w-6 h-6 text-gray-600" />,
+    criminal: <Scale className="w-6 h-6 text-gray-600" />,
+    family: <Heart className="w-6 h-6 text-gray-600" />,
+    corporate: <Building2 className="w-6 h-6 text-gray-600" />,
+    intellectual: <Lightbulb className="w-6 h-6 text-gray-600" />,
+  };
+  return iconMap[categoryId] || <FileText className="w-6 h-6 text-gray-600" />;
+};
+
+const getHeaderIcon = (categoryId: string) => {
+  const iconMap: { [key: string]: React.ReactNode } = {
+    labor: <Users className="w-16 h-16" />,
+    civil: <FileText className="w-16 h-16" />,
+    criminal: <Scale className="w-16 h-16" />,
+    family: <Heart className="w-16 h-16" />,
+    corporate: <Building2 className="w-16 h-16" />,
+    intellectual: <Lightbulb className="w-16 h-16" />,
+  };
+  return iconMap[categoryId] || <FileText className="w-16 h-16" />;
+};
 
 export default function Category() {
   const { categoryId } = useParams<{ categoryId: string }>();
+
+  // Scroll to top when category changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [categoryId]);
 
   const category = categories.find((c) => c.id === categoryId);
   const categoryLaws = laws.filter((law) => law.category === categoryId);
@@ -41,14 +85,16 @@ export default function Category() {
         </Link>
 
         <div
-          className={`bg-gradient-to-br ${category.color} rounded-xl p-8 text-white mb-8`}
+          className={`bg-gradient-to-br opacity-80 ${getCategoryGradient(category.id)}  p-8 text-white mb-8`}
         >
           <div className="flex items-start justify-between mb-4">
             <div>
               <p className="text-white/80 mb-2">Category</p>
               <h1 className="text-4xl sm:text-5xl font-bold">{category.title}</h1>
             </div>
-            <div className="text-6xl opacity-80">{category.icon}</div>
+            <div className="text-5xl opacity-80">
+              {getHeaderIcon(category.id)}
+            </div>
           </div>
           <p className="text-white/90 text-lg max-w-2xl">
             {category.description}
@@ -70,7 +116,7 @@ export default function Category() {
             >
               <div className="border border-gray-200 rounded-lg p-6 transition-all duration-300 hover:border-blue-300 hover:shadow-md bg-white hover:bg-blue-50">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold">
+                  <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center text-white font-semibold">
                     {index + 1}
                   </div>
                   <div className="flex-1 min-w-0">
@@ -116,7 +162,9 @@ export default function Category() {
                 >
                   <div className="border border-gray-200 rounded-lg p-4 transition-all duration-300 hover:border-blue-300 hover:shadow-md bg-white">
                     <div className="flex items-start gap-3">
-                      <span className="text-3xl">{cat.icon}</span>
+                      <div className="text-2xl flex-shrink-0">
+                        {getCategoryIcon(cat.id)}
+                      </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors mb-1">
                           {cat.title}

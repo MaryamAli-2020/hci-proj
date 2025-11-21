@@ -31,7 +31,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Sticky Header */}
-      <header className="sticky top-0 z-50 border-b border-gray-200 bg-slate-900">
+      <header className="sticky top-0 z-50 border-b border-gray-200 bg-black shadow-md">
         <div className="container max-w-7xl mx-auto px-4 py-4">
           <div className={`flex items-center justify-between gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
             {/* Logo and Home Link */}
@@ -45,7 +45,7 @@ export function Layout({ children }: LayoutProps) {
                 alt="QANOON"
                 className="h-10 w-auto hidden sm:block"
               />
-              <span className="font-bold text-xl text-white hidden sm:inline group-hover:text-amber-500 transition-colors">
+              <span className="font-bold text-xl text-white hidden sm:inline group-hover:text-[#BF9140] transition-colors">
                 QANOON
               </span>
             </Link>
@@ -54,19 +54,19 @@ export function Layout({ children }: LayoutProps) {
             <nav className={`hidden md:flex items-center gap-8 ${isRTL ? "flex-row-reverse" : ""}`}>
               <Link
                 to="/"
-                className="text-gray-200 hover:text-amber-400 transition-colors font-medium text-sm"
+                className="text-gray-100 hover:text-[#BF9140] transition-colors font-medium text-sm"
               >
                 {t("header.browse")}
               </Link>
               <a
                 href="#features"
-                className="text-gray-200 hover:text-amber-400 transition-colors font-medium text-sm"
+                className="text-gray-100 hover:text-[#BF9140] transition-colors font-medium text-sm"
               >
                 {t("header.features")}
               </a>
               <a
                 href="#about"
-                className="text-gray-200 hover:text-amber-400 transition-colors font-medium text-sm"
+                className="text-gray-100 hover:text-[#BF9140] transition-colors font-medium text-sm"
               >
                 {t("header.about")}
               </a>
@@ -84,12 +84,12 @@ export function Layout({ children }: LayoutProps) {
                   placeholder={t("header.searchPlaceholder")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-48 h-9 text-sm pr-3 border-gray-600 bg-slate-800 text-white placeholder-gray-500"
+                  className="w-48 h-9 text-sm pr-3 border-gray-400 bg-gray-800 text-white placeholder-gray-300"
                   aria-label="Search laws"
                 />
                 <button
                   type="submit"
-                  className="absolute right-3 text-gray-500 hover:text-gray-300"
+                  className="absolute right-3 text-gray-300 hover:text-white"
                   aria-label="Submit search"
                 >
                   <Search className="w-4 h-4" />
@@ -113,7 +113,7 @@ export function Layout({ children }: LayoutProps) {
               {/* Chat Button */}
               <Button
                 onClick={() => setIsChatOpen(true)}
-                className="bg-amber-600 hover:bg-amber-700 text-white gap-2 hidden sm:flex font-medium"
+                className="bg-[#BF9140] hover:bg-[#A67C2E] text-white gap-2 hidden sm:flex font-medium"
                 size="sm"
                 aria-label="Open AI chat assistant"
               >
