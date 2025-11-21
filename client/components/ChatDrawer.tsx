@@ -68,7 +68,38 @@ function generateMockResponse(question: string): AiAssistantResponse {
   const lowerQuestion = question.toLowerCase();
   let answer = "";
   
-  if (lowerQuestion.includes("business") || lowerQuestion.includes("start")) {
+  if (lowerQuestion.includes("student") && lowerQuestion.includes("visa")) {
+    answer = `To obtain a student visa in the UAE, follow these steps:
+
+1. **Get an Admission Letter**: Receive a formal acceptance letter from a recognized educational institution in the UAE
+2. **Passport Requirement**: Ensure your passport is valid for at least 6 months
+3. **Medical Fitness**: Complete medical examination and obtain a fitness certificate
+4. **Apply for Residence Visa**: Submit your visa application through the educational institution or through the General Directorate of Residency and Foreigners Affairs (GDRFA)
+5. **Required Documents**: Submit passport, admission letter, medical report, financial proof, and sponsor's documents
+6. **Visa Processing**: Processing typically takes 1-4 weeks depending on the emirate
+7. **Entry and Registration**: Upon arrival, register with GDRFA and obtain your Emirates ID
+
+**Important Notes**:
+- Student visas are usually sponsored by the educational institution
+- The visa is valid for the duration of studies plus a grace period
+- Dependents may be eligible to join under certain conditions`;
+  } else if (lowerQuestion.includes("visa") && (lowerQuestion.includes("work") || lowerQuestion.includes("employment"))) {
+    answer = `To obtain a work visa in the UAE:
+
+1. **Job Offer**: Secure a job offer from a UAE employer
+2. **Visa Sponsorship**: Your employer will sponsor your work visa
+3. **Medical Examination**: Pass a medical fitness test at an approved clinic
+4. **Documentation**: Provide passport, employment contract, educational certificates, and medical results
+5. **Residence Visa Processing**: Your employer submits documents to immigration authorities
+6. **Entry Permit**: Receive an entry permit allowing you to enter the UAE
+7. **Emirates ID**: Upon arrival, obtain an Emirates ID card
+
+**Employment Requirements**:
+- Work contract with defined terms and conditions
+- Compliance with UAE Labour Law (Federal Decree No. 8 of 1980)
+- Salary and benefits as per employment contract
+- Mandatory health insurance`;
+  } else if (lowerQuestion.includes("business") || lowerQuestion.includes("start")) {
     answer = `To start a business in Dubai, you need to follow these steps:
 
 1. **Choose a Business Structure**: Decide between Free Zone Company, Mainland Company, or Offshore Company
@@ -105,7 +136,7 @@ Contracts can be verbal or written. Written contracts are preferred for commerci
 
 To get the most accurate legal guidance, I recommend:
 1. Consulting with a qualified UAE legal professional
-2. Reviewing the official government websites (DCAT, DEWA, etc.)
+2. Reviewing the official government websites (DCAT, DEWA, GDRFA, etc.)
 3. Checking the specific legal text applicable to your situation`;
   }
 
@@ -196,10 +227,12 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
 
         if (response.ok) {
           data = await response.json();
+        } else {
+          console.warn(`API returned status ${response.status}, using mock response`);
         }
       } catch (fetchError) {
         // API not available, will use mock response below
-        console.warn("API endpoint not available, using mock response");
+        console.warn("API endpoint not available, using mock response", fetchError);
       }
 
       // If API call failed or wasn't available, use mock response

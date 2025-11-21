@@ -1,16 +1,8 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
+import { RequestHandler } from "express";
 import { laws } from "../shared/laws";
-
-interface ContextLaw {
-  id: string;
-  title: string;
-  content: string;
-  legalReference: string;
-}
 
 interface AiAssistantRequest {
   question: string;
-  contextLaw?: ContextLaw;
 }
 
 interface AiAssistantResponse {
@@ -97,22 +89,9 @@ Please refer to the legal resources below for more detailed information.`;
   };
 };
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
+export const handleAiAssistant: RequestHandler = (req, res) => {
   try {
-    const { question, contextLaw } = req.body as AiAssistantRequest;
+    const { question } = req.body as AiAssistantRequest;
 
     if (!question || typeof question !== "string") {
       return res.status(400).json({ error: "Question is required" });
@@ -134,4 +113,4 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
       message: error instanceof Error ? error.message : "Unknown error"
     });
   }
-}
+};
