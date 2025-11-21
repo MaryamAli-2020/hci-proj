@@ -179,13 +179,13 @@ export default function Search() {
           <div className="lg:col-span-3">
             {/* AI Suggestions */}
             {results.length > 0 && (
-              <div className="mb-8 p-6 bg-black border border-[#BF9140] rounded-sm">
-                <h2 className="text-lg font-semibold text-white mb-3">
+              <div className="mb-8 p-6  border border-[#BF9140] rounded-sm">
+                <h2 className="text-lg font-semibold text-black mb-3">
                   AI Insights
                 </h2>
                 <ul className="space-y-2">
                   {suggestions.map((suggestion, idx) => (
-                    <li key={idx} className="text-sm text-gray-100 flex gap-2">
+                    <li key={idx} className="text-sm text-black-100 flex gap-2">
                       <span className="text-[#BF9140] font-bold">•</span>
                       {suggestion}
                     </li>
