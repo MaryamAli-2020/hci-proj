@@ -31,7 +31,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Sticky Header */}
-      <header className="sticky top-0 z-50 border-b border-gray-200 bg-black shadow-md">
+      <header className="sticky top-0 z-50 bg-black shadow-lg">
         <div className="container max-w-7xl mx-auto px-4 py-4">
           <div className={`flex items-center justify-between gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
             {/* Logo and Home Link */}
@@ -158,7 +158,7 @@ export function Layout({ children }: LayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 container max-w-7xl mx-auto px-4 py-8 w-full">
+      <main className="flex-1 container max-w-7xl mx-auto px-4 w-full">
         {children}
       </main>
 

@@ -25,7 +25,7 @@ export default function Index() {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="mb-24 -mx-4 sm:mx-0 px-4 sm:px-0 py-20 sm:py-28 bg-gradient-to-br from-black via-gray-900 to-black rounded-none sm:rounded-lg">
+      <section className="mb-24 -mx-4 -ml-[calc(50vw-50%)] -mr-[calc(50vw-50%)] px-[calc(50vw-50%+1rem)] py-20 sm:py-36 bg-gradient-to-br from-black via-gray-900 to-black">
         <div className={`max-w-4xl mx-auto text-center mb-12 ${isRTL ? "text-right" : ""}`}>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
             {t("hero.title")} <span className="text-[#BF9140]">Qanoon</span>
