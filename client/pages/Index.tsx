@@ -34,12 +34,18 @@ export default function Index() {
             {t("hero.description")}
           </p>
           <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL ? "flex-row-reverse" : ""}`}>
-            <Button className="bg-[#BF9140] hover:bg-[#A67C2E] text-white gap-2 px-8 py-3 h-auto text-base font-semibold rounded-sm transition-all duration-200">
+            <Button 
+              onClick={() => document.getElementById("categories")?.scrollIntoView({ behavior: "smooth" })}
+              className="bg-[#BF9140] hover:bg-[#A67C2E] text-white gap-2 px-8 py-3 h-auto text-base font-semibold rounded-sm transition-all duration-200 cursor-pointer">
               {t("hero.exploreCategories")} <ArrowRight className="w-4 h-4" />
             </Button>
             <Button
+              onClick={() => {
+                const chatButton = document.querySelector('[aria-label="Open AI chat assistant"]') as HTMLButtonElement;
+                chatButton?.click();
+              }}
               variant="outline"
-              className="border-gray-300 text-white hover:bg-gray-700 gap-2 px-8 py-3 h-auto text-base font-semibold rounded-sm bg-gray-800 bg-opacity-50"
+              className="border-gray-300 text-white hover:bg-gray-700 gap-2 px-8 py-3 h-auto text-base font-semibold rounded-sm bg-gray-800 bg-opacity-50 cursor-pointer"
             >
               {t("hero.askLegalAssistant")}
             </Button>
