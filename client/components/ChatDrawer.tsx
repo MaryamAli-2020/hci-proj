@@ -67,6 +67,7 @@ function MarkdownContent({ text, references }: { text: string; references?: LawR
 function generateMockResponse(question: string): AiAssistantResponse {
   const lowerQuestion = question.toLowerCase();
   let answer = "";
+  let lawIds: string[] = [];
   
   if (lowerQuestion.includes("student") && lowerQuestion.includes("visa")) {
     answer = `To obtain a student visa in the UAE, follow these steps:
@@ -83,6 +84,7 @@ function generateMockResponse(question: string): AiAssistantResponse {
 - Student visas are usually sponsored by the educational institution
 - The visa is valid for the duration of studies plus a grace period
 - Dependents may be eligible to join under certain conditions`;
+    lawIds = ["labor-6", "labor-8"];
   } else if (lowerQuestion.includes("visa") && (lowerQuestion.includes("work") || lowerQuestion.includes("employment"))) {
     answer = `To obtain a work visa in the UAE:
 
@@ -99,6 +101,7 @@ function generateMockResponse(question: string): AiAssistantResponse {
 - Compliance with UAE Labour Law (Federal Decree No. 8 of 1980)
 - Salary and benefits as per employment contract
 - Mandatory health insurance`;
+    lawIds = ["labor-1", "labor-4", "labor-6"];
   } else if (lowerQuestion.includes("business") || lowerQuestion.includes("start")) {
     answer = `To start a business in Dubai, you need to follow these steps:
 
@@ -110,7 +113,8 @@ function generateMockResponse(question: string): AiAssistantResponse {
 6. **Open a Bank Account**: Open a corporate bank account with required documentation
 
 The process typically takes 1-2 weeks. Dubai offers various incentives including 100% foreign ownership in Free Zones, corporate tax exemptions in certain sectors, and modern infrastructure.`;
-  } else if (lowerQuestion.includes("labor") || lowerQuestion.includes("employee")) {
+    lawIds = ["corporate-1", "corporate-2", "corporate-3"];
+  } else if (lowerQuestion.includes("labor") || lowerQuestion.includes("employee") || lowerQuestion.includes("work")) {
     answer = `UAE Labour Law provides comprehensive protections for both employers and employees:
 
 Key provisions include:
@@ -121,6 +125,7 @@ Key provisions include:
 - **Termination**: Specific procedures must be followed
 
 Disputes are resolved through the UAE Labour Courts. Both local and expatriate workers enjoy equal legal protections under UAE Labour Law.`;
+    lawIds = ["labor-1", "labor-2", "labor-3", "labor-5"];
   } else if (lowerQuestion.includes("contract") || lowerQuestion.includes("agreement")) {
     answer = `UAE Civil Law governs contracts and agreements. Key principles include:
 
@@ -131,18 +136,167 @@ Disputes are resolved through the UAE Labour Courts. Both local and expatriate w
 - **Consent**: Agreement must be free from duress
 
 Contracts can be verbal or written. Written contracts are preferred for commercial transactions. UAE courts enforce contracts according to the parties' intentions and local law principles.`;
+    lawIds = ["civil-1", "civil-2", "civil-3"];
+  } else if (lowerQuestion.includes("salary") || lowerQuestion.includes("wage") || lowerQuestion.includes("minimum wage")) {
+    answer = `The UAE sets and enforces minimum wage requirements to protect workers.
+
+**Key Facts About UAE Wages**:
+- **Current Minimum Wage**: AED 2,500 per month for private sector workers
+- **Overtime Compensation**: Minimum 25% above regular wage
+- **Payment Requirements**: Wages must be paid on time and in full
+- **Deductions**: Limited deductions permitted under law
+- **Collective Agreements**: May provide higher wages than minimum
+
+Workers have the right to fair compensation and payment on schedule. Any disputes regarding wages can be brought before the UAE Labour Court.`;
+    lawIds = ["labor-1", "labor-4", "labor-9"];
+  } else if (lowerQuestion.includes("leave") || lowerQuestion.includes("vacation") || lowerQuestion.includes("holiday")) {
+    answer = `UAE Labour Law provides comprehensive leave entitlements for workers.
+
+**Annual Leave Rights**:
+- **Standard Leave**: Minimum 30 calendar days per year
+- **Hazardous Work**: 45 days per year for workers in hazardous conditions
+- **Public Holidays**: Included in the leave calculation
+- **Payment During Leave**: Workers receive full wages
+- **Unused Leave**: Typically paid out upon employment termination
+
+**Sick Leave**: Workers are entitled to paid sick leave as per regulations. The specific duration varies but is typically 10-30 days depending on circumstances.
+
+Employers cannot refuse leave entitlements, and workers cannot waive these rights.`;
+    lawIds = ["labor-2", "labor-8"];
+  } else if (lowerQuestion.includes("safety") || lowerQuestion.includes("health") || lowerQuestion.includes("accident")) {
+    answer = `Workplace safety and health are paramount under UAE Labour Law.
+
+**Employer Obligations**:
+- **Safe Environment**: Provide safe and healthy working conditions
+- **Safety Equipment**: Supply necessary protective equipment and training
+- **Hazard Prevention**: Identify and mitigate workplace hazards
+- **Medical Care**: Ensure access to medical facilities
+- **Insurance**: Maintain workers' compensation insurance
+- **Incident Reporting**: Report workplace accidents
+
+**Worker Rights**:
+- Right to refuse unsafe work
+- Right to training on safety procedures
+- Right to compensation for work-related injuries
+- Protection from retaliation for reporting safety issues
+
+The Ministry of Human Resources enforces these regulations through regular workplace inspections.`;
+    lawIds = ["labor-5", "labor-10"];
   } else {
     answer = `Thank you for your question about UAE law. Based on your inquiry and our available legal resources, I've compiled relevant information and references for you.
 
 To get the most accurate legal guidance, I recommend:
 1. Consulting with a qualified UAE legal professional
 2. Reviewing the official government websites (DCAT, DEWA, GDRFA, etc.)
-3. Checking the specific legal text applicable to your situation`;
+3. Checking the specific legal text applicable to your situation
+
+Please browse our legal categories or search for specific topics to find more detailed information.`;
+    lawIds = ["labor-1", "civil-1", "corporate-1"];
   }
+
+  // Mock law references - in production, these would be fetched from database
+  const lawReferencesMap: { [key: string]: LawReference } = {
+    "labor-1": {
+      lawId: "labor-1",
+      title: "Working Hours and Overtime",
+      legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Articles 64-66",
+      excerpt: "The normal working hours shall not exceed 48 hours per week. Overtime work shall be remunerated at least 25% above the ordinary wage."
+    },
+    "labor-2": {
+      lawId: "labor-2",
+      title: "Annual Leave and Public Holidays",
+      legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Articles 70-72",
+      excerpt: "Every worker shall be entitled to an annual leave of at least 30 calendar days, including public holidays."
+    },
+    "labor-3": {
+      lawId: "labor-3",
+      title: "End of Service Gratuity",
+      legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Article 84",
+      excerpt: "An employer shall pay an end of service gratuity to every worker whose service is terminated based on years of service."
+    },
+    "labor-4": {
+      lawId: "labor-4",
+      title: "Minimum Wage Requirements",
+      legalReference: "UAE Cabinet Resolution No. 15 of 2020 regarding Minimum Wage",
+      excerpt: "The minimum wage for workers in the private sector is AED 2,500 per month for all workers."
+    },
+    "labor-5": {
+      lawId: "labor-5",
+      title: "Workplace Safety and Health",
+      legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Articles 119-125",
+      excerpt: "Employers must provide safe and healthy working conditions, ensure proper ventilation, adequate lighting, and sanitary facilities."
+    },
+    "labor-6": {
+      lawId: "labor-6",
+      title: "Work Permits and Residency",
+      legalReference: "UAE Residency and Immigration Laws",
+      excerpt: "Work permits are required for employment in the UAE and are typically sponsored by employers."
+    },
+    "labor-8": {
+      lawId: "labor-8",
+      title: "Employment Contracts",
+      legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Articles 30-50",
+      excerpt: "Employment contracts must specify terms and conditions, job duties, salary, and benefits."
+    },
+    "labor-9": {
+      lawId: "labor-9",
+      title: "Wage Payment Procedures",
+      legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Article 67",
+      excerpt: "Wages must be paid in full and on time. Unauthorized deductions are prohibited."
+    },
+    "labor-10": {
+      lawId: "labor-10",
+      title: "Workers' Compensation Insurance",
+      legalReference: "UAE Labour Law Federal Decree No. 8 of 1980, Articles 128-137",
+      excerpt: "Employers must maintain insurance to cover workers injured during employment."
+    },
+    "civil-1": {
+      lawId: "civil-1",
+      title: "UAE Civil Law Basics",
+      legalReference: "UAE Civil Code",
+      excerpt: "Governs civil and commercial transactions, including contracts and agreements."
+    },
+    "civil-2": {
+      lawId: "civil-2",
+      title: "Contract Law",
+      legalReference: "UAE Civil Code",
+      excerpt: "Covers formation, interpretation, and enforcement of contracts."
+    },
+    "civil-3": {
+      lawId: "civil-3",
+      title: "Dispute Resolution",
+      legalReference: "UAE Civil Code",
+      excerpt: "Provides procedures for resolving civil disputes through courts."
+    },
+    "corporate-1": {
+      lawId: "corporate-1",
+      title: "Company Formation and Registration",
+      legalReference: "UAE Commercial Companies Law Federal Law No. 2 of 2015",
+      excerpt: "Establishes procedures for registering and operating business entities in the UAE."
+    },
+    "corporate-2": {
+      lawId: "corporate-2",
+      title: "Free Zone Business Operations",
+      legalReference: "UAE Free Zone Regulations",
+      excerpt: "Allows 100% foreign ownership and provides tax incentives for businesses in free zones."
+    },
+    "corporate-3": {
+      lawId: "corporate-3",
+      title: "Trade License Requirements",
+      legalReference: "Department of Commerce and Tourism Regulations",
+      excerpt: "Specifies requirements for obtaining and maintaining trade licenses in the UAE."
+    }
+  };
+
+  // Filter references to only return the ones requested, up to 3
+  const references = lawIds
+    .map(id => lawReferencesMap[id])
+    .filter(Boolean)
+    .slice(0, 3);
 
   return {
     answer,
-    references: []
+    references
   };
 }
 

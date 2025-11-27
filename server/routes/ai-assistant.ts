@@ -26,20 +26,8 @@ interface AiAssistantResponse {
 // Mock AI response generator for demonstration
 const generateMockResponse = (question: string): { answer: string; references: any[] } => {
   const lowerQuestion = question.toLowerCase();
-  
-  // Find relevant laws based on keywords
-  let relevantLaws = laws.filter(law => {
-    const content = `${law.title} ${law.description} ${law.content}`.toLowerCase();
-    const keywords = lowerQuestion.split(' ').filter(w => w.length > 3);
-    return keywords.some(keyword => content.includes(keyword));
-  }).slice(0, 3);
-
-  // If no relevant laws found, return general response
-  if (relevantLaws.length === 0) {
-    relevantLaws = laws.slice(0, 2);
-  }
-
   let answer = "";
+  let selectedLawIds: string[] = [];
   
   if (lowerQuestion.includes("student") && lowerQuestion.includes("visa")) {
     answer = `To obtain a student visa in the UAE, follow these steps:
@@ -56,6 +44,7 @@ const generateMockResponse = (question: string): { answer: string; references: a
 - Student visas are usually sponsored by the educational institution
 - The visa is valid for the duration of studies plus a grace period
 - Dependents may be eligible to join under certain conditions`;
+    selectedLawIds = ["labor-6", "labor-8"];
   } else if (lowerQuestion.includes("visa") && (lowerQuestion.includes("work") || lowerQuestion.includes("employment"))) {
     answer = `To obtain a work visa in the UAE:
 
@@ -72,6 +61,7 @@ const generateMockResponse = (question: string): { answer: string; references: a
 - Compliance with UAE Labour Law (Federal Decree No. 8 of 1980)
 - Salary and benefits as per employment contract
 - Mandatory health insurance`;
+    selectedLawIds = ["labor-1", "labor-4", "labor-6"];
   } else if (lowerQuestion.includes("business") || lowerQuestion.includes("start")) {
     answer = `To start a business in Dubai, you need to follow these steps:
 
@@ -82,10 +72,9 @@ const generateMockResponse = (question: string): { answer: string; references: a
 5. **Register with Authorities**: Register with DEWA, Municipality, and other relevant authorities
 6. **Open a Bank Account**: Open a corporate bank account with required documentation
 
-The process typically takes 1-2 weeks. Dubai offers various incentives including 100% foreign ownership in Free Zones, corporate tax exemptions in certain sectors, and modern infrastructure.
-
-For detailed information about specific business types and requirements, please refer to the related legal resources below.`;
-  } else if (lowerQuestion.includes("labor") || lowerQuestion.includes("employee")) {
+The process typically takes 1-2 weeks. Dubai offers various incentives including 100% foreign ownership in Free Zones, corporate tax exemptions in certain sectors, and modern infrastructure.`;
+    selectedLawIds = ["corporate-1", "corporate-2", "corporate-3"];
+  } else if (lowerQuestion.includes("labor") || lowerQuestion.includes("employee") || lowerQuestion.includes("work")) {
     answer = `UAE Labour Law provides comprehensive protections for both employers and employees:
 
 Key provisions include:
@@ -96,6 +85,7 @@ Key provisions include:
 - **Termination**: Specific procedures must be followed
 
 Disputes are resolved through the UAE Labour Courts. Both local and expatriate workers enjoy equal legal protections under UAE Labour Law.`;
+    selectedLawIds = ["labor-1", "labor-2", "labor-3", "labor-5"];
   } else if (lowerQuestion.includes("contract") || lowerQuestion.includes("agreement")) {
     answer = `UAE Civil Law governs contracts and agreements. Key principles include:
 
@@ -106,25 +96,64 @@ Disputes are resolved through the UAE Labour Courts. Both local and expatriate w
 - **Consent**: Agreement must be free from duress
 
 Contracts can be verbal or written. Written contracts are preferred for commercial transactions. UAE courts enforce contracts according to the parties' intentions and local law principles.`;
+    selectedLawIds = ["civil-1", "civil-2", "civil-3"];
+  } else if (lowerQuestion.includes("salary") || lowerQuestion.includes("wage") || lowerQuestion.includes("minimum wage")) {
+    answer = `The UAE sets and enforces minimum wage requirements to protect workers.
+
+**Key Facts About UAE Wages**:
+- **Current Minimum Wage**: AED 2,500 per month for private sector workers
+- **Overtime Compensation**: Minimum 25% above regular wage
+- **Payment Requirements**: Wages must be paid on time and in full
+- **Deductions**: Limited deductions permitted under law
+- **Collective Agreements**: May provide higher wages than minimum
+
+Workers have the right to fair compensation and payment on schedule.`;
+    selectedLawIds = ["labor-1", "labor-4", "labor-9"];
+  } else if (lowerQuestion.includes("leave") || lowerQuestion.includes("vacation") || lowerQuestion.includes("holiday")) {
+    answer = `UAE Labour Law provides comprehensive leave entitlements for workers.
+
+**Annual Leave Rights**:
+- **Standard Leave**: Minimum 30 calendar days per year
+- **Hazardous Work**: 45 days per year for workers in hazardous conditions
+- **Public Holidays**: Included in the leave calculation
+- **Payment During Leave**: Workers receive full wages
+- **Unused Leave**: Typically paid out upon employment termination`;
+    selectedLawIds = ["labor-2", "labor-8"];
+  } else if (lowerQuestion.includes("safety") || lowerQuestion.includes("health") || lowerQuestion.includes("accident")) {
+    answer = `Workplace safety and health are paramount under UAE Labour Law.
+
+**Employer Obligations**:
+- **Safe Environment**: Provide safe and healthy working conditions
+- **Safety Equipment**: Supply necessary protective equipment and training
+- **Hazard Prevention**: Identify and mitigate workplace hazards
+- **Medical Care**: Ensure access to medical facilities
+- **Insurance**: Maintain workers' compensation insurance`;
+    selectedLawIds = ["labor-5", "labor-10"];
   } else {
     answer = `Thank you for your question about UAE law. Based on your inquiry and our available legal resources, I've compiled relevant information and references for you.
 
 To get the most accurate legal guidance, I recommend:
 1. Consulting with a qualified UAE legal professional
-2. Reviewing the official government websites (DCAT, DEWA, etc.)
-3. Checking the specific legal text applicable to your situation
-
-Please refer to the legal resources below for more detailed information.`;
+2. Reviewing the official government websites (DCAT, DEWA, GDRFA, etc.)
+3. Checking the specific legal text applicable to your situation`;
+    selectedLawIds = ["labor-1", "civil-1", "corporate-1"];
   }
+
+  // Get actual law references from the laws database
+  const references = selectedLawIds
+    .map(id => laws.find(law => law.id === id))
+    .filter(Boolean)
+    .slice(0, 3)
+    .map(law => ({
+      lawId: law!.id,
+      title: law!.title,
+      legalReference: law!.legalReference,
+      excerpt: law!.description
+    }));
 
   return {
     answer,
-    references: relevantLaws.map(law => ({
-      lawId: law.id,
-      title: law.title,
-      legalReference: law.legalReference,
-      excerpt: law.description
-    }))
+    references
   };
 };
 
