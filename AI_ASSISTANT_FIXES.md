@@ -1,9 +1,11 @@
 # AI Assistant - Law References Fix
 
 ## Problem
+
 The AI assistant was not displaying law references in the chat drawer. Users would ask questions about UAE laws, but no legal citations or related laws would appear below the answers.
 
 ## Root Cause
+
 Both the client-side and server-side `generateMockResponse` functions had their reference mapping broken:
 
 1. **Client (`ChatDrawer.tsx`)**: Was returning empty `references: []` array
@@ -14,6 +16,7 @@ Both the client-side and server-side `generateMockResponse` functions had their 
 ### 1. Client-Side Fix (ChatDrawer.tsx)
 
 **Enhanced the mock response generator** to:
+
 - Return specific law IDs based on question keywords
 - Create a comprehensive `lawReferencesMap` with mock law references including:
   - Law ID
@@ -32,6 +35,7 @@ Both the client-side and server-side `generateMockResponse` functions had their 
 ### 2. Server-Side Fix (ai-assistant.ts)
 
 **Improved the mock response generator** to:
+
 - Match questions to specific law IDs rather than generic keyword matching
 - Query the actual `laws` database array to fetch real law objects
 - Extract proper law details (ID, title, legal reference, description)
@@ -42,26 +46,28 @@ Both the client-side and server-side `generateMockResponse` functions had their 
 
 The AI assistant now provides references for:
 
-| Question Type | Referenced Laws | Example |
-|---|---|---|
-| Student Visa | labor-6, labor-8 | "How to get a student visa" |
-| Work Visa | labor-1, labor-4, labor-6 | "How to get a work visa" |
-| Starting Business | corporate-1, corporate-2, corporate-3 | "How to start a business" |
-| Labour/Work | labor-1, labor-2, labor-3, labor-5 | "Tell me about labour law" |
-| Contracts | civil-1, civil-2, civil-3 | "What about contract law" |
-| Wages/Salary | labor-1, labor-4, labor-9 | "What is minimum wage" |
-| Leave/Vacation | labor-2, labor-8 | "How much leave do I get" |
-| Safety/Health | labor-5, labor-10 | "What about workplace safety" |
-| Default | labor-1, civil-1, corporate-1 | Any other question |
+| Question Type     | Referenced Laws                       | Example                       |
+| ----------------- | ------------------------------------- | ----------------------------- |
+| Student Visa      | labor-6, labor-8                      | "How to get a student visa"   |
+| Work Visa         | labor-1, labor-4, labor-6             | "How to get a work visa"      |
+| Starting Business | corporate-1, corporate-2, corporate-3 | "How to start a business"     |
+| Labour/Work       | labor-1, labor-2, labor-3, labor-5    | "Tell me about labour law"    |
+| Contracts         | civil-1, civil-2, civil-3             | "What about contract law"     |
+| Wages/Salary      | labor-1, labor-4, labor-9             | "What is minimum wage"        |
+| Leave/Vacation    | labor-2, labor-8                      | "How much leave do I get"     |
+| Safety/Health     | labor-5, labor-10                     | "What about workplace safety" |
+| Default           | labor-1, civil-1, corporate-1         | Any other question            |
 
 ## Changes Made
 
 ### File: `client/components/ChatDrawer.tsx`
+
 - **Lines**: Mock response generator function
 - **Change**: Added law reference mapping and return references instead of empty array
 - **Impact**: References now display in chat drawer below AI answers
 
 ### File: `server/routes/ai-assistant.ts`
+
 - **Lines**: Mock response generator function
 - **Change**: Changed from keyword-based matching to question-type matching with real law lookups
 - **Impact**: Consistent references returned from API endpoint
@@ -86,6 +92,7 @@ Users can click on any reference to navigate to the full law detail page.
 To verify the fix works:
 
 1. Start the dev server:
+
    ```bash
    pnpm dev
    ```
