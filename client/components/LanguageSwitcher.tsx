@@ -16,7 +16,8 @@ export function LanguageSwitcher() {
     i18n.changeLanguage(language);
     localStorage.setItem("language", language);
     document.documentElement.lang = language;
-    document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
+    // Set RTL for Arabic and Urdu
+    document.documentElement.dir = (language === "ar" || language === "ur") ? "rtl" : "ltr";
   };
 
   return (
@@ -30,6 +31,11 @@ export function LanguageSwitcher() {
       <SelectContent>
         <SelectItem value="en">{t("common.english")}</SelectItem>
         <SelectItem value="ar">{t("common.arabic")}</SelectItem>
+        <SelectItem value="zh">{t("common.chineseSimplified")}</SelectItem>
+        <SelectItem value="zht">{t("common.chineseTraditional")}</SelectItem>
+        <SelectItem value="ur">{t("common.urdu")}</SelectItem>
+        <SelectItem value="es">{t("common.spanish")}</SelectItem>
+        <SelectItem value="fr">{t("common.french")}</SelectItem>
       </SelectContent>
     </Select>
   );
