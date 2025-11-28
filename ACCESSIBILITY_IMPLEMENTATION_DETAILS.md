@@ -89,17 +89,19 @@ VoiceInput
 ## 🔧 Hook: useAccessibility
 
 ### State Management
+
 ```typescript
 interface AccessibilitySettings {
-  highContrast: boolean;      // Default: false
-  screenReaderMode: boolean;  // Default: false
-  largeText: boolean;         // Default: false
-  reducedMotion: boolean;     // Default: false
-  focusIndicators: boolean;   // Default: true
+  highContrast: boolean; // Default: false
+  screenReaderMode: boolean; // Default: false
+  largeText: boolean; // Default: false
+  reducedMotion: boolean; // Default: false
+  focusIndicators: boolean; // Default: true
 }
 ```
 
 ### Initialization
+
 ```typescript
 // 1. Load from localStorage
 const saved = localStorage.getItem('accessibility-settings');
@@ -109,44 +111,46 @@ const settings = saved ? JSON.parse(saved) : { defaults... };
 ```
 
 ### Side Effects
+
 ```typescript
 // Effect 1: Apply CSS Classes
 useEffect(() => {
   // Add/remove CSS classes on document.documentElement
   if (settings.highContrast) {
-    document.documentElement.classList.add('high-contrast');
+    document.documentElement.classList.add("high-contrast");
   }
   // ... for all 5 settings
-  
+
   // Persist to localStorage
-  localStorage.setItem('accessibility-settings', JSON.stringify(settings));
-  
+  localStorage.setItem("accessibility-settings", JSON.stringify(settings));
+
   // Announce to screen readers
   if (settings.screenReaderMode) {
-    announceToScreenReader('Settings updated', 'polite');
+    announceToScreenReader("Settings updated", "polite");
   }
 }, [settings]);
 
 // Effect 2: Detect Reduced Motion Preference
 useEffect(() => {
-  const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  mediaQuery.addEventListener('change', (e) => {
-    setSettings(prev => ({ ...prev, reducedMotion: e.matches }));
+  const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mediaQuery.addEventListener("change", (e) => {
+    setSettings((prev) => ({ ...prev, reducedMotion: e.matches }));
   });
-  return () => mediaQuery.removeEventListener('change', handleChange);
+  return () => mediaQuery.removeEventListener("change", handleChange);
 }, []);
 
 // Effect 3: Detect High Contrast Preference
 useEffect(() => {
-  const mediaQuery = window.matchMedia('(prefers-contrast: more)');
+  const mediaQuery = window.matchMedia("(prefers-contrast: more)");
   // Similar to Effect 2
 }, []);
 ```
 
 ### Methods
+
 ```typescript
 // updateSetting - Change a setting
-updateSetting('highContrast', true);
+updateSetting("highContrast", true);
 
 // announceToScreenReader - Announce changes
 announceToScreenReader(message, priority);
@@ -160,57 +164,59 @@ createSkipLink();
 ## 🔊 Hook: useVoiceInput
 
 ### Initialization
+
 ```typescript
 // Check browser support
-const isSupported = 
-  'webkitSpeechRecognition' in window || 
-  'SpeechRecognition' in window;
+const isSupported =
+  "webkitSpeechRecognition" in window || "SpeechRecognition" in window;
 
 // Initialize recognition
-const SpeechRecognition = 
+const SpeechRecognition =
   window.webkitSpeechRecognition || window.SpeechRecognition;
 const recognition = new SpeechRecognition();
 
 // Configure
-recognition.continuous = false;          // Single utterance
-recognition.interimResults = true;       // Show while speaking
-recognition.lang = localStorage.getItem('language') || 'en-US';
+recognition.continuous = false; // Single utterance
+recognition.interimResults = true; // Show while speaking
+recognition.lang = localStorage.getItem("language") || "en-US";
 ```
 
 ### Event Handlers
 
 #### onstart
+
 ```typescript
 recognition.onstart = () => {
-  setState(prev => ({
+  setState((prev) => ({
     ...prev,
     isListening: true,
     error: null,
-    transcript: ''
+    transcript: "",
   }));
-  announceToScreenReader('Voice input started. Speak now.', 'polite');
+  announceToScreenReader("Voice input started. Speak now.", "polite");
 };
 ```
 
 #### onresult
+
 ```typescript
 recognition.onresult = (event) => {
-  let interimTranscript = '';
-  let finalTranscript = '';
+  let interimTranscript = "";
+  let finalTranscript = "";
 
   for (let i = event.resultIndex; i < event.results.length; i++) {
     const transcript = event.results[i][0].transcript;
     if (event.results[i].isFinal) {
-      finalTranscript += transcript + ' ';
+      finalTranscript += transcript + " ";
     } else {
       interimTranscript += transcript;
     }
   }
 
-  setState(prev => ({
+  setState((prev) => ({
     ...prev,
     transcript: finalTranscript || interimTranscript,
-    isFinal: finalTranscript.length > 0
+    isFinal: finalTranscript.length > 0,
   }));
 
   if (finalTranscript) {
@@ -220,37 +226,40 @@ recognition.onresult = (event) => {
 ```
 
 #### onerror
+
 ```typescript
 recognition.onerror = (event) => {
   const errorMessages = {
-    'network': 'Network error. Please check your connection.',
-    'no-speech': 'No speech detected. Please try again.',
-    'audio-capture': 'No microphone found. Please check permissions.',
-    'not-allowed': 'Microphone access denied. Please allow permissions.'
+    network: "Network error. Please check your connection.",
+    "no-speech": "No speech detected. Please try again.",
+    "audio-capture": "No microphone found. Please check permissions.",
+    "not-allowed": "Microphone access denied. Please allow permissions.",
   };
 
   const errorMsg = errorMessages[event.error] || `Error: ${event.error}`;
-  setState(prev => ({ ...prev, error: errorMsg, isListening: false }));
-  announceToScreenReader(errorMsg, 'assertive');
+  setState((prev) => ({ ...prev, error: errorMsg, isListening: false }));
+  announceToScreenReader(errorMsg, "assertive");
 };
 ```
 
 #### onend
+
 ```typescript
 recognition.onend = () => {
-  setState(prev => ({ ...prev, isListening: false }));
+  setState((prev) => ({ ...prev, isListening: false }));
   if (state.transcript) {
-    announceToScreenReader(`You said: ${state.transcript}`, 'polite');
+    announceToScreenReader(`You said: ${state.transcript}`, "polite");
   }
 };
 ```
 
 ### Methods
+
 ```typescript
-startListening();   // recognition.start()
-stopListening();    // recognition.stop()
-toggleListening();  // Start or stop
-clearTranscript();  // Clear current transcript
+startListening(); // recognition.start()
+stopListening(); // recognition.stop()
+toggleListening(); // Start or stop
+clearTranscript(); // Clear current transcript
 ```
 
 ---
@@ -258,6 +267,7 @@ clearTranscript();  // Clear current transcript
 ## 🎨 CSS Classes Implementation
 
 ### High Contrast Mode
+
 ```css
 .high-contrast {
   /* Override color variables */
@@ -285,14 +295,21 @@ clearTranscript();  // Clear current transcript
 ```
 
 ### Large Text Mode
+
 ```css
 .large-text {
   font-size: 1.125rem; /* 18px */
 }
 
-.large-text h1 { @apply text-4xl; }
-.large-text h2 { @apply text-3xl; }
-.large-text h3 { @apply text-2xl; }
+.large-text h1 {
+  @apply text-4xl;
+}
+.large-text h2 {
+  @apply text-3xl;
+}
+.large-text h3 {
+  @apply text-2xl;
+}
 
 .large-text button,
 .large-text [role="button"] {
@@ -307,6 +324,7 @@ clearTranscript();  // Clear current transcript
 ```
 
 ### Reduced Motion Mode
+
 ```css
 .reduced-motion * {
   animation-duration: 0.01ms !important;
@@ -320,6 +338,7 @@ clearTranscript();  // Clear current transcript
 ```
 
 ### Enhanced Focus Indicators
+
 ```css
 .focus-indicators *:focus {
   @apply outline-2 outline-offset-2 outline-blue-600;
@@ -333,6 +352,7 @@ clearTranscript();  // Clear current transcript
 ```
 
 ### Screen Reader Only
+
 ```css
 .sr-only {
   position: absolute;
@@ -453,33 +473,36 @@ User can clear or submit
 ## 🧪 Testing Examples
 
 ### Test High Contrast Styling
+
 ```typescript
 // In DevTools console
-document.documentElement.classList.add('high-contrast');
+document.documentElement.classList.add("high-contrast");
 // CSS applies immediately
-document.documentElement.classList.remove('high-contrast');
+document.documentElement.classList.remove("high-contrast");
 // CSS removes
 ```
 
 ### Test Voice Input
+
 ```javascript
 // In browser console
 // Check if supported
-console.log('webkitSpeechRecognition' in window);
+console.log("webkitSpeechRecognition" in window);
 
 // Check current language
-console.log(localStorage.getItem('language'));
+console.log(localStorage.getItem("language"));
 
 // Check accessibility settings
-console.log(JSON.parse(localStorage.getItem('accessibility-settings')));
+console.log(JSON.parse(localStorage.getItem("accessibility-settings")));
 ```
 
 ### Test Screen Reader Announcements
+
 ```javascript
 // Create test region
-const region = document.createElement('div');
-region.setAttribute('aria-live', 'polite');
-region.textContent = 'Test announcement';
+const region = document.createElement("div");
+region.setAttribute("aria-live", "polite");
+region.textContent = "Test announcement";
 document.body.appendChild(region);
 
 // Screen reader will announce "Test announcement"
@@ -488,6 +511,7 @@ setTimeout(() => document.body.removeChild(region), 1000);
 ```
 
 ### Test Keyboard Navigation
+
 ```javascript
 // Press Tab to navigate
 // Check focus styles in DevTools
@@ -548,6 +572,7 @@ Settings persist on page reload
 ## 🔐 Security & Privacy
 
 ### Voice Input Privacy
+
 - Speech processing happens on-device (when supported)
 - Browser manages microphone permissions
 - No data sent without user action
@@ -555,12 +580,14 @@ Settings persist on page reload
 - Transcript cleared on demand
 
 ### Settings Privacy
+
 - Settings stored in localStorage (client-side only)
 - No server-side tracking
 - No telemetry by default
 - User has full control
 
 ### ARIA Attributes
+
 - No sensitive data in aria-labels
 - Labels describe purpose only
 - No personal information exposed
@@ -570,22 +597,26 @@ Settings persist on page reload
 ## ⚡ Performance Considerations
 
 ### CSS Classes
+
 - No runtime overhead (CSS applied once)
 - Browser repaints when class added/removed
 - No animation during accessibility mode
 
 ### Voice Input
+
 - One recognition instance per component
 - Speech API is native browser feature
 - Minimal memory footprint (~5MB)
 - Audio garbage collected after use
 
 ### localStorage
+
 - ~5-10KB per settings key
 - No performance impact
 - ~1ms read/write time
 
 ### Announcements
+
 - Create and remove DOM elements dynamically
 - 1-second lifetime per announcement
 - No memory leaks
@@ -595,18 +626,20 @@ Settings persist on page reload
 ## 🐛 Debugging
 
 ### Enable Debug Logging
+
 ```typescript
 // In useAccessibility
-console.log('Settings:', settings);
-console.log('CSS classes applied');
+console.log("Settings:", settings);
+console.log("CSS classes applied");
 
 // In useVoiceInput
-console.log('Recognition state:', isListening);
-console.log('Transcript:', transcript);
-console.log('Error:', error);
+console.log("Recognition state:", isListening);
+console.log("Transcript:", transcript);
+console.log("Error:", error);
 ```
 
 ### Check Settings in DevTools
+
 ```javascript
 // Console
 JSON.parse(localStorage.getItem('accessibility-settings'))
@@ -622,6 +655,7 @@ JSON.parse(localStorage.getItem('accessibility-settings'))
 ```
 
 ### Monitor Recognition Events
+
 ```javascript
 // DevTools Sources → Breakpoints
 // Set on recognition.onstart, onresult, onerror, onend
@@ -639,4 +673,3 @@ JSON.parse(localStorage.getItem('accessibility-settings'))
 - **AODA**: Canadian accessibility legislation
 
 All implemented features comply with these standards.
-
