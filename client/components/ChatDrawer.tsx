@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { AiAssistantResponse, LawReference } from "@shared/api";
 import type { Law } from "@shared/laws";
 import { useNavigate } from "react-router-dom";
+import { VoiceInput } from "./VoiceInput";
 
 // Markdown renderer component
 function MarkdownContent({ text, references }: { text: string; references?: LawReference[] }) {
@@ -549,25 +550,20 @@ export function ChatDrawer({ isOpen, onClose, contextLaw }: ChatDrawerProps) {
 
         {/* Input Area */}
         <div className="border-t border-gray-200 p-4 bg-white">
-          <form onSubmit={handleSendMessage} className="flex gap-2">
-            <Input
-              type="text"
-              placeholder="Ask about UAE law..."
+          <form onSubmit={handleSendMessage} className="flex flex-col gap-2">
+            <VoiceInput
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={setInput}
+              placeholder="Ask about UAE law..."
               disabled={isLoading}
-              aria-label="Type your question"
-              className="flex-1 text-sm"
+              showVoiceButton={true}
+              onTranscriptComplete={(transcript) => {
+                // Auto-send if user says specific commands
+                if (transcript.toLowerCase() === "send" || transcript.toLowerCase() === "submit") {
+                  handleSendMessage({ preventDefault: () => {} } as any);
+                }
+              }}
             />
-            <Button
-              type="submit"
-              disabled={isLoading || !input.trim()}
-              size="sm"
-              className="bg-amber-600 hover:bg-amber-700 text-white"
-              aria-label="Send message"
-            >
-              <Send className="w-4 h-4" />
-            </Button>
           </form>
           <p className="text-xs text-gray-500 mt-2 flex items-center gap-2">
             <Lightbulb className="w-4 h-4 flex-shrink-0" />

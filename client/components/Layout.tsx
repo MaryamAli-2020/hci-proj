@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ChatDrawer } from "./ChatDrawer";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { AccessibilitySettings } from "./AccessibilitySettings";
 
 interface LayoutProps {
   children: ReactNode;
@@ -98,6 +99,9 @@ export function Layout({ children }: LayoutProps) {
 
               {/* Language Switcher */}
               <LanguageSwitcher />
+
+              {/* Accessibility Settings */}
+              <AccessibilitySettings />
 
               {/* Mobile Search Button */}
               <Button

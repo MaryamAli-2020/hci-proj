@@ -178,3 +178,155 @@ a {
 input, textarea, select {
   @apply border-gray-300 focus:border-blue-900 focus:ring-blue-900;
 }
+
+/* ========== ACCESSIBILITY FEATURES ========== */
+
+/* Screen Reader Only Content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus:not-sr-only {
+  position: relative;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* High Contrast Mode */
+.high-contrast {
+  --background: 0 0% 100%;
+  --foreground: 0 0% 0%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 0%;
+  --primary: 0 0% 0%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 0 0% 0%;
+  --accent-foreground: 0 100% 50%;
+  --border: 0 0% 0%;
+  --input: 0 0% 95%;
+}
+
+.high-contrast a {
+  @apply underline font-bold;
+}
+
+.high-contrast button,
+.high-contrast [role="button"] {
+  @apply border-2 border-current;
+}
+
+.high-contrast input:focus,
+.high-contrast textarea:focus,
+.high-contrast select:focus {
+  @apply ring-2 ring-black;
+}
+
+/* Large Text Mode */
+.large-text {
+  font-size: 1.125rem; /* 18px */
+}
+
+.large-text body {
+  line-height: 1.6;
+}
+
+.large-text h1 {
+  @apply text-4xl;
+}
+
+.large-text h2 {
+  @apply text-3xl;
+}
+
+.large-text h3 {
+  @apply text-2xl;
+}
+
+.large-text button,
+.large-text [role="button"] {
+  @apply text-base py-3 px-4;
+}
+
+.large-text input,
+.large-text textarea,
+.large-text select {
+  @apply text-base py-3 px-4;
+}
+
+/* Reduced Motion Mode */
+.reduced-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+.reduced-motion [class*="animate-"] {
+  animation: none !important;
+}
+
+/* Enhanced Focus Indicators */
+.focus-indicators *:focus {
+  @apply outline-2 outline-offset-2 outline-blue-600;
+}
+
+.focus-indicators button:focus,
+.focus-indicators [role="button"]:focus,
+.focus-indicators a:focus {
+  @apply outline-4 outline-offset-4 outline-blue-600;
+}
+
+/* Skip to Main Content Link */
+.skip-to-main {
+  @apply sr-only focus:not-sr-only focus:fixed focus:top-0 focus:left-0 focus:z-50 focus:bg-black focus:text-white focus:p-4 focus:rounded-br-lg;
+}
+
+/* Keyboard Navigation Indicators */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-blue-600;
+}
+
+/* Touch Target Size (WCAG 2.1) */
+button, a, input[type="checkbox"], input[type="radio"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Improved color contrast for text */
+.high-contrast .text-gray-600 {
+  @apply text-gray-900;
+}
+
+.high-contrast .text-gray-500 {
+  @apply text-gray-900;
+}
+
+.high-contrast .bg-gray-50 {
+  @apply bg-white border-2 border-black;
+}
+
+.high-contrast .bg-gray-100 {
+  @apply bg-white border-2 border-black;
+}
+
+/* RTL Adjustments for Accessibility */
+[dir="rtl"] .sr-only {
+  margin-right: -1px;
+}
+
+[dir="rtl"] *:focus-visible {
+  outline-offset: 2px;
+}
+
