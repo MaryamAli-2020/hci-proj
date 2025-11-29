@@ -88,6 +88,7 @@ export default function Category() {
 
       {/* Header */}
       <div className="mb-12">
+        <div
           className={`bg-gradient-to-br opacity-80 ${getCategoryGradient(category.id)}  p-8 text-white mb-8`}
         >
           <div className="flex items-start justify-between mb-4">
