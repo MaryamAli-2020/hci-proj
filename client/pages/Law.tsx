@@ -121,19 +121,19 @@ export default function Law() {
   return (
     <Layout>
       {/* Breadcrumb */}
-      <div className={`mb-6 flex items-center gap-2 text-sm text-gray-600 ${isRTL ? "flex-row-reverse" : ""}`}>
-        <Link to="/" className="hover:text-black transition-colors">
+      <div className={`mb-8 pt-4 flex items-center gap-2 text-sm text-gray-600 whitespace-nowrap overflow-x-auto ${isRTL ? "flex-row-reverse" : ""}`}>
+        <Link to="/" className="hover:text-black transition-colors flex-shrink-0">
           Home
         </Link>
-        <span>/</span>
+        <span className="flex-shrink-0">/</span>
         <Link
           to={`/category/${category.id}`}
-          className="hover:text-black transition-colors"
+          className="hover:text-black transition-colors flex-shrink-0"
         >
           {category.title}
         </Link>
-        <span>/</span>
-        <span className="text-gray-900 font-medium">{law.title}</span>
+        <span className="flex-shrink-0">/</span>
+        <span className="text-gray-900 font-medium truncate">{law.title}</span>
       </div>
 
       {/* Header */}

@@ -30,107 +30,116 @@ export function Layout({ children }: LayoutProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-50 bg-black shadow-lg">
-        <div className="container max-w-7xl mx-auto px-4 py-4">
-          <div className={`flex items-center justify-between gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
-            {/* Logo and Home Link */}
+    <div className="min-h-screen bg-white flex flex-col overflow-x-hidden">
+      {/* Modern Header */}
+      <header className="sticky top-0 z-50 bg-gradient-to-r from-gray-900 via-black to-gray-900 shadow-xl overflow-x-hidden border-b border-[#BF9140]/20">
+        <div className="container max-w-7xl mx-auto px-4">
+          {/* Top Section - Logo & Main Controls */}
+          <div className={`flex items-center justify-between gap-6 py-4 ${isRTL ? "flex-row-reverse" : ""}`}>
+            {/* Logo and Brand */}
             <Link
               to="/"
-              className={`flex items-center gap-2 group ${isRTL ? "flex-row-reverse" : ""}`}
+              className={`flex items-center gap-3 group flex-shrink-0 ${isRTL ? "flex-row-reverse" : ""}`}
               aria-label="QANOON Home"
             >
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2Ff46060a51def4581996706726593bb17%2F847e2fca57024abbaa68546de032858b"
-                alt="QANOON"
-                className="h-10 w-auto hidden sm:block"
-              />
-              <span className="font-bold text-xl text-white hidden sm:inline group-hover:text-[#BF9140] transition-colors">
-                QANOON
-              </span>
+              <div className="relative">
+                <img
+                  src="https://cdn.builder.io/api/v1/image/assets%2Ff46060a51def4581996706726593bb17%2F847e2fca57024abbaa68546de032858b"
+                  alt="QANOON"
+                  className="h-11 w-auto hidden sm:block transition-transform group-hover:scale-110"
+                />
+              </div>
+              <div className="hidden sm:flex flex-col">
+                <span className="font-bold text-xl text-white group-hover:text-[#BF9140] transition-colors">
+                  QANOON
+                </span>
+                <span className="text-xs text-gray-400 font-medium">Legal Intelligence</span>
+              </div>
             </Link>
 
-            {/* Navigation Links - Hidden on Mobile */}
-            <nav className={`hidden md:flex items-center gap-8 ${isRTL ? "flex-row-reverse" : ""}`}>
+            {/* Center Navigation - Hidden on Mobile */}
+            <nav className={`hidden lg:flex items-center gap-1 flex-1 justify-center ${isRTL ? "flex-row-reverse" : ""}`}>
               <Link
                 to="/"
-                className="text-gray-100 hover:text-[#BF9140] transition-colors font-medium text-sm"
+                className="px-4 py-2 text-gray-200 hover:text-[#BF9140] hover:bg-gray-800/50 rounded-lg transition-all font-medium text-sm"
               >
                 {t("header.browse")}
               </Link>
               <a
                 href="#features"
-                className="text-gray-100 hover:text-[#BF9140] transition-colors font-medium text-sm"
+                className="px-4 py-2 text-gray-200 hover:text-[#BF9140] hover:bg-gray-800/50 rounded-lg transition-all font-medium text-sm"
               >
                 {t("header.features")}
               </a>
               <a
                 href="#about"
-                className="text-gray-100 hover:text-[#BF9140] transition-colors font-medium text-sm"
+                className="px-4 py-2 text-gray-200 hover:text-[#BF9140] hover:bg-gray-800/50 rounded-lg transition-all font-medium text-sm"
               >
                 {t("header.about")}
               </a>
             </nav>
 
-            {/* Search and Action Buttons */}
-            <div className={`flex items-center gap-2 sm:gap-3 ${isRTL ? "flex-row-reverse" : ""}`}>
-              {/* Search - Responsive */}
+            {/* Right Actions - Organized */}
+            <div className={`flex items-center gap-2 sm:gap-3 flex-shrink-0 ${isRTL ? "flex-row-reverse" : ""}`}>
+              {/* Search - Hidden on Mobile */}
               <form
                 onSubmit={handleSearch}
-                className="relative hidden sm:flex items-center"
+                className="relative hidden sm:flex items-center bg-gray-800 rounded-lg px-3 py-2 hover:bg-gray-700 transition-colors"
               >
-                <Input
+                <input
                   type="text"
                   placeholder={t("header.searchPlaceholder")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-48 h-9 text-sm pr-3 border-gray-400 bg-gray-800 text-white placeholder-gray-300"
+                  className="w-40 bg-transparent text-white placeholder-gray-400 text-sm outline-none focus:text-white"
                   aria-label="Search laws"
                 />
                 <button
                   type="submit"
-                  className="absolute right-3 text-gray-300 hover:text-white"
+                  className="text-gray-400 hover:text-[#BF9140] transition-colors"
                   aria-label="Submit search"
                 >
                   <Search className="w-4 h-4" />
                 </button>
               </form>
 
-              {/* Language Switcher */}
-              <LanguageSwitcher />
+              {/* Divider */}
+              <div className="hidden sm:block h-6 w-px bg-gray-700"></div>
 
-              {/* Accessibility Settings */}
-              <AccessibilitySettings />
+              {/* Language & Accessibility */}
+              <div className={`flex items-center gap-2 ${isRTL ? "flex-row-reverse" : ""}`}>
+                <LanguageSwitcher />
+                <AccessibilitySettings />
+              </div>
 
-              {/* Mobile Search Button */}
+              {/* Primary CTA Button */}
               <Button
-                variant="ghost"
+                onClick={() => setIsChatOpen(true)}
+                className="bg-gradient-to-r from-[#BF9140] to-[#A67C2E] hover:from-[#D4A574] hover:to-[#B8944A] text-white gap-2 font-semibold hidden sm:flex shadow-lg hover:shadow-xl transition-all"
                 size="sm"
+                aria-label="Open AI chat assistant"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span className="hidden md:inline">{t("header.askAI")}</span>
+              </Button>
+
+              {/* Mobile Menu Toggle */}
+              <Button
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="sm:hidden text-gray-300 hover:text-white"
+                variant="ghost"
+                size="icon"
+                className="sm:hidden text-gray-300 hover:text-[#BF9140] hover:bg-gray-800"
                 aria-label="Open search"
               >
                 <Search className="w-5 h-5" />
               </Button>
 
-              {/* Chat Button */}
-              <Button
-                onClick={() => setIsChatOpen(true)}
-                className="bg-[#BF9140] hover:bg-[#A67C2E] text-white gap-2 hidden sm:flex font-medium"
-                size="sm"
-                aria-label="Open AI chat assistant"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>{t("header.askAI")}</span>
-              </Button>
-
-              {/* Chat Button - Mobile */}
+              {/* Mobile Chat Button */}
               <Button
                 onClick={() => setIsChatOpen(true)}
                 variant="ghost"
-                size="sm"
-                className="sm:hidden text-gray-300 hover:text-white"
+                size="icon"
+                className="sm:hidden text-gray-300 hover:text-[#BF9140] hover:bg-gray-800"
                 aria-label="Open AI chat assistant"
               >
                 <MessageSquare className="w-5 h-5" />
@@ -138,11 +147,11 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
 
-          {/* Mobile Search Bar */}
+          {/* Mobile Search Bar - Expandable */}
           {searchOpen && (
             <form
               onSubmit={handleSearch}
-              className={`mt-4 flex sm:hidden items-center gap-2 ${isRTL ? "flex-row-reverse" : ""}`}
+              className={`mt-3 mb-3 flex sm:hidden items-center gap-2 ${isRTL ? "flex-row-reverse" : ""}`}
             >
               <Input
                 type="text"
@@ -150,10 +159,10 @@ export function Layout({ children }: LayoutProps) {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
-                className="flex-1 text-sm"
+                className="flex-1 text-sm bg-gray-800 border-gray-700 text-white placeholder-gray-400"
                 aria-label="Search laws"
               />
-              <Button type="submit" size="sm" className="bg-amber-600 hover:bg-amber-700">
+              <Button type="submit" size="sm" className="bg-[#BF9140] hover:bg-[#A67C2E] text-white">
                 <Search className="w-4 h-4" />
               </Button>
             </form>
@@ -162,13 +171,15 @@ export function Layout({ children }: LayoutProps) {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 container max-w-7xl mx-auto px-4 w-full">
-        {children}
+      <main className="flex-1 w-full overflow-x-hidden">
+        <div className="container max-w-7xl mx-auto px-4 w-full">
+          {children}
+        </div>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 bg-gray-50 mt-16">
-        <div className="container max-w-7xl mx-auto px-4 py-12">
+      <footer className="border-t border-gray-200 bg-gray-50 mt-16 overflow-x-hidden">
+        <div className="container max-w-7xl mx-auto px-4 py-12 w-full">
           <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 ${isRTL ? "text-right" : ""}`}>
             <div>
               <h3 className="font-semibold text-gray-900 mb-4">{t("footer.categories")}</h3>

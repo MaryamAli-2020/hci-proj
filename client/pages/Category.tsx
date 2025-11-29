@@ -77,14 +77,17 @@ export default function Category() {
 
   return (
     <Layout>
+      {/* Breadcrumb Navigation */}
+      <div className="flex items-center gap-2 text-sm text-gray-600 mb-8 pt-4 whitespace-nowrap overflow-x-auto">
+        <Link to="/" className="hover:text-black transition-colors flex-shrink-0">
+          Home
+        </Link>
+        <span className="flex-shrink-0">/</span>
+        <span className="text-gray-900 font-medium flex-shrink-0">{category.title}</span>
+      </div>
+
       {/* Header */}
       <div className="mb-12">
-        <Link to="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 mb-6 font-medium">
-          <ArrowLeft className="w-4 h-4" />
-          Back to Categories
-        </Link>
-
-        <div
           className={`bg-gradient-to-br opacity-80 ${getCategoryGradient(category.id)}  p-8 text-white mb-8`}
         >
           <div className="flex items-start justify-between mb-4">

@@ -64,15 +64,15 @@ export function AccessibilitySettings() {
           <Settings className="w-5 h-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent side={isRTL ? "left" : "right"} className="w-full sm:w-96">
-        <SheetHeader>
+      <SheetContent side={isRTL ? "left" : "right"} className="w-full sm:w-96 flex flex-col">
+        <SheetHeader className="flex-shrink-0">
           <SheetTitle>Accessibility Settings</SheetTitle>
           <SheetDescription>
             Customize the application for your needs. Your preferences are saved locally.
           </SheetDescription>
         </SheetHeader>
 
-        <div className="space-y-6 mt-6">
+        <div className="flex-1 overflow-y-auto space-y-6 mt-6 pr-4">
           {accessibilityOptions.map((option) => (
             <div
               key={option.id}
@@ -99,8 +99,7 @@ export function AccessibilitySettings() {
           ))}
         </div>
 
-        {/* Preset Combinations */}
-        <div className="mt-8 pt-6 border-t">
+        <div className="flex-shrink-0 mt-8 pt-6 border-t">
           <p className="text-sm font-semibold text-gray-700 mb-3">Quick Presets</p>
           <div className="grid grid-cols-2 gap-2">
             <Button
@@ -155,7 +154,7 @@ export function AccessibilitySettings() {
         </div>
 
         {/* WCAG Compliance Info */}
-        <div className="mt-6 p-3 bg-blue-50 rounded-lg text-sm text-gray-700">
+        <div className="flex-shrink-0 mt-6 p-3 bg-blue-50 rounded-lg text-sm text-gray-700">
           <p className="font-semibold text-blue-900 mb-1">WCAG 2.1 AA Compliant</p>
           <p>
             This application meets WCAG 2.1 Level AA standards for web accessibility.

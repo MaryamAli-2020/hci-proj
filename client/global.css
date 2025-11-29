@@ -108,13 +108,21 @@
     @apply border-border;
   }
 
+  html {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-background text-foreground;
+    width: 100%;
+    overflow-x: hidden;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
     overflow-wrap: anywhere;
     word-break: break-word;
+    max-width: 100%;
   }
 
   pre,
@@ -174,9 +182,29 @@ a {
   @apply text-blue-900 hover:text-red-700 transition-colors;
 }
 
+/* Breadcrumb styling */
+nav a, .breadcrumb a {
+  @apply hover:text-black transition-colors;
+}
+
+.breadcrumb {
+  @apply flex items-center gap-2 text-sm text-gray-600 whitespace-nowrap overflow-x-auto;
+  padding-bottom: 8px;
+}
+
 /* Input styling */
 input, textarea, select {
   @apply border-gray-300 focus:border-blue-900 focus:ring-blue-900;
+  max-width: 100%;
+}
+
+/* Container styling */
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
 }
 
 /* ========== ACCESSIBILITY FEATURES ========== */
@@ -320,6 +348,59 @@ button, a, input[type="checkbox"], input[type="radio"] {
 .high-contrast .bg-gray-100 {
   @apply bg-white border-2 border-black;
 }
+
+/* ========== HEADER STYLING ========== */
+
+header {
+  background-image: linear-gradient(135deg, rgba(17, 24, 39, 1) 0%, rgba(0, 0, 0, 1) 50%, rgba(17, 24, 39, 1) 100%);
+  box-shadow: 0 4px 20px rgba(191, 145, 64, 0.1), 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+header nav a {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+header nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #BF9140, #D4A574);
+  transition: width 0.3s ease;
+}
+
+header nav a:hover::after {
+  width: 100%;
+}
+
+/* Search bar styling */
+form input::placeholder {
+  color: rgba(156, 163, 175, 0.8);
+}
+
+/* Smooth transitions for header elements */
+header button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header button:hover {
+  transform: translateY(-2px);
+}
+
+/* Logo animation */
+header a[aria-label="QANOON Home"] img {
+  filter: drop-shadow(0 2px 4px rgba(191, 145, 64, 0.2));
+  transition: all 0.3s ease;
+}
+
+header a[aria-label="QANOON Home"]:hover img {
+  filter: drop-shadow(0 4px 12px rgba(191, 145, 64, 0.4));
+}
+
+/* ========== END HEADER STYLING ========== */
 
 /* RTL Adjustments for Accessibility */
 [dir="rtl"] .sr-only {
